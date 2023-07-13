@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+// add --->
+use App\Http\Controllers\ShuhoController;
+// add <---
 
 /*
 |--------------------------------------------------------------------------
@@ -12,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+// add --->
+Route::resource('shuhos', ShuhoController::class);
+// add <---
 
 Route::get('/', function () {
     return view('welcome');
