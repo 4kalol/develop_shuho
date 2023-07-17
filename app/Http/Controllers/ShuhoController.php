@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Shuho;
 
 class ShuhoController extends Controller
 {
@@ -12,12 +13,11 @@ class ShuhoController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     // add --->
      public function __construct()
      {
          $this->middleware('auth');
      }
-     // add <---
+
     public function index()
     {
         return view('shuhos.index');
@@ -30,7 +30,7 @@ class ShuhoController extends Controller
      */
     public function create()
     {
-        //
+        return view('shuhos.create');
     }
 
     /**
@@ -41,7 +41,19 @@ class ShuhoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+
+        // $user = User::create([
+        $user = Shuho::create([
+            'name' => $request->name,
+            'level' => $request->level,
+            'report' => $request->report,
+            'checked' => false,
+            'comment' => "",
+        ]);
+
+        // リダイレクト先(Store処理後に遷移する画面).
+        return to_route('shuhos.index');
     }
 
     /**

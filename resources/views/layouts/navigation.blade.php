@@ -7,7 +7,7 @@
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
                         <!--<x-application-logo class="block h-10 w-auto fill-current text-blue-600" />-->
-                        <img src="{{ asset('storage/images/logo_shuhoAPP.png') }}" width="50" height="50">
+                        <img src="{{ asset('storage/images/logo_shuhoAPP.png') }}" width="40" height="30">
                     </a>
                 </div>
 

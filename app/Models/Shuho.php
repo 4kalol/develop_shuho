@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Shuho extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'name',
+        'level',
+        'report',
+        'checked',
+        'comment',
+    ];
 }
