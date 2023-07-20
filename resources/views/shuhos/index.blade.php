@@ -9,8 +9,30 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    アプリのメイン画面です！<br>
-                    <a href="{{ route('shuhos.create') }}" class="text-blue-500">新規登録</a>
+                    <div class="lg:w-2/3 w-full mx-auto overflow-auto">
+                    <table class="table-auto w-full text-left whitespace-no-wrap">
+                        <thead>
+                        <tr>
+                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">id</th>
+                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">氏名</th>
+                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">作成日</th>
+                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">承認</th>
+                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">詳細</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($shuhos as $shuho)
+                        <tr>
+                            <td class="px-4 py-3">{{ $shuho->id }}</td>
+                            <td class="px-4 py-3">{{ $shuho->name }}</td>
+                            <td class="px-4 py-3">{{ $shuho->created_at }}</td>
+                            <td class="px-4 py-3">{{ $checked[$shuho->id - 1] }}</td>
+                            <td class="px-4 py-3 text-blue-500"><a href="{{ route('shuhos.show',$shuho->id) }}">詳細を見る</a></td>
+                        </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                    </div>
                 </div>
             </div>
         </div>

@@ -20,7 +20,24 @@ class ShuhoController extends Controller
 
     public function index()
     {
-        return view('shuhos.index');
+        // DBよりデータを取得
+        $shuhos = Shuho::select('id', 'name', 'created_at' ,'checked')
+        ->get();
+
+        // checked がtrueなら済,falseなら空文字になるようにする.
+        $checked = [];
+        foreach ($shuhos as $shuho){
+            if ($shuho->checked == true){
+                $checked[] = "済";
+            }
+            if ($shuho->checked == false){
+                $checked[] = "未";
+            }
+        }
+        
+        // return view('shuhos.index');
+        //return view('shuhos.index', compact('shuhos'));
+        return view('shuhos.index', ['shuhos' => $shuhos, 'checked' => $checked]);
     }
 
     /**
@@ -64,7 +81,8 @@ class ShuhoController extends Controller
      */
     public function show($id)
     {
-        //
+        $shuho = Shuho::find($id);
+        return view('shuhos.show', compact('shuho'));
     }
 
     /**
