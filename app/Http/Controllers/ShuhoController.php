@@ -93,7 +93,8 @@ class ShuhoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $shuho = Shuho::find($id);
+        return view('shuhos.edit', compact('shuho'));
     }
 
     /**
@@ -105,7 +106,16 @@ class ShuhoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $shuho = Shuho::find($id);
+        $shuho->name = $request->name;
+        $shuho->level = $request->level;
+        $shuho->report = $request->report;
+        //$shuho->checked = $request->checked;
+        //$shuho->comment = $request->comment;
+        $shuho->save();
+
+        // リダイレクト先(Store処理後に遷移する画面).
+        return redirect()->route('shuhos.index');
     }
 
     /**

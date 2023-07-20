@@ -49,6 +49,11 @@
                                 }
                                 @endphp
                                 <label for="level" class="leading-7 text-sm text-gray-600">順調度合い</label><br>
+                                @php
+                                if (empty($strLevel) == true){
+                                  $strLevel = '入力なし';
+                                }
+                                @endphp
                                 <p id="level" name="level" class="w-full bg-white-100 bg-opacity-50 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">{{ $strLevel }}</p>
                             </div>
                             </div>
@@ -61,7 +66,7 @@
                             </div>
                             </div>
                             
-                            <!-- Report(報告内容) -->
+                            <!-- checked(承認) -->
                             <div class="p-2 w-full">
                             <div class="relative">
                                 @php
@@ -87,14 +92,11 @@
                             </div>
 
                             <!-- button(編集ボタン) -->
-                            </div>
-                            <div class="p-2 w-full">
-                            <a href="" class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">編集</a>
-                            </div>
                             <!-- button(削除ボタン) -->
                             </div>
-                            <div class="p-2 w-full">
-                            <a href="" class="flex mx-auto text-white bg-pink-500 border-0 py-2 px-8 focus:outline-none hover:bg-pink-600 rounded text-lg">削除</a>
+                            <div class="p-2 w-1/4">
+                            <a href="{{ route('shuhos.edit',$shuho->id) }}" class="flex mx-auto my-1 text-white bg-indigo-500 border-0 flex justify-center ... focus:outline-none hover:bg-indigo-600 rounded text-lg">編集</a>
+                            <a href="" class="flex mx-auto text-white bg-pink-500 border-0 flex justify-center ... focus:outline-none hover:bg-pink-600 rounded text-lg">削除</a>
                             </div>
 
                         </div>
