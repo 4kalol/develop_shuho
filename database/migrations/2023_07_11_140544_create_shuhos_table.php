@@ -18,8 +18,7 @@ return new class extends Migration
             $table->text('name');
             $table->enum('level', ['good', 'normal', 'bad']);
             $table->text('report');
-            $table->date('created_at');
-            $table->date('updated_at');
+            $table->timestamps();
             $table->boolean('checked');
             $table->text('comment');
         });
