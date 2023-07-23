@@ -94,9 +94,14 @@
                             <!-- button(編集ボタン) -->
                             <!-- button(削除ボタン) -->
                             </div>
-                            <div class="p-2 w-1/4">
-                            <a href="{{ route('shuhos.edit',$shuho->id) }}" class="flex mx-auto my-1 text-white bg-indigo-500 border-0 flex justify-center ... focus:outline-none hover:bg-indigo-600 rounded text-lg">編集</a>
-                            <a href="" class="flex mx-auto text-white bg-pink-500 border-0 flex justify-center ... focus:outline-none hover:bg-pink-600 rounded text-lg">削除</a>
+                            <div class="p-2">
+                            <a href="{{ route('shuhos.edit',$shuho->id) }}" class="w-1/4 flex mx-auto my-1 text-white bg-indigo-500 border-0 flex justify-center ... focus:outline-none hover:bg-indigo-600 rounded text-lg">編集</a>
+                            <!-- 削除ボタン用にDELETEメソッドを持つフォームを使用 -->
+                            <form action="{{ route('shuhos.destroy', $shuho->id) }}" method="POST" onsubmit="return confirm('本当に削除してもよろしいですか？');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="w-1/4 flex mx-auto text-white bg-pink-500 border-0 flex justify-center ... focus:outline-none hover:bg-pink-600 rounded text-lg">削除</button>
+                            </form>
                             </div>
 
                         </div>

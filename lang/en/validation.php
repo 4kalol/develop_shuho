@@ -87,7 +87,7 @@ return [
         'array' => 'The :attribute must not have more than :max items.',
         'file' => 'The :attribute must not be greater than :max kilobytes.',
         'numeric' => 'The :attribute must not be greater than :max.',
-        'string' => 'The :attribute must not be greater than :max characters.',
+        'string' => '":attribute"は:max文字以内で入力してください。',
     ],
     'mimes' => 'The :attribute must be a file of type: :values.',
     'mimetypes' => 'The :attribute must be a file of type: :values.',
@@ -114,7 +114,7 @@ return [
     'prohibited_unless' => 'The :attribute field is prohibited unless :other is in :values.',
     'prohibits' => 'The :attribute field prohibits :other from being present.',
     'regex' => 'The :attribute format is invalid.',
-    'required' => 'The :attribute field is required.',
+    'required' => '":attribute"は必須項目です。',
     'required_array_keys' => 'The :attribute field must contain entries for: :values.',
     'required_if' => 'The :attribute field is required when :other is :value.',
     'required_unless' => 'The :attribute field is required unless :other is in :values.',
@@ -130,7 +130,7 @@ return [
         'string' => 'The :attribute must be :size characters.',
     ],
     'starts_with' => 'The :attribute must start with one of the following: :values.',
-    'string' => 'The :attribute must be a string.',
+    'string' => '":attribute"は文字列で入力してください。',
     'timezone' => 'The :attribute must be a valid timezone.',
     'unique' => 'The :attribute has already been taken.',
     'uploaded' => 'The :attribute failed to upload.',
@@ -165,6 +165,10 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'name'=>'氏名',
+        'level'=>'順調度合い',
+        'report'=>'報告内容'
+    ],
 
 ];

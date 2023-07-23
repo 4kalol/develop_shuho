@@ -10,6 +10,10 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <section class="text-gray-600 body-font relative">
+
+                    <!-- Validation Errors -->
+                    <x-auth-validation-errors class="mb-4" :errors="$errors" />
+                    
                     <form method="post" action="{{ route('shuhos.update', $shuho->id) }}">
                         @csrf
                         @method('PUT')
@@ -32,9 +36,9 @@
                             <div class="p-2 w-full">
                             <div class="relative">
                                 <label for="level" class="leading-7 text-sm text-gray-600">順調度合い</label><br>
-                                <input type="radio" name="level" value="0" @if($shuho->level == 'good') checked  @endif>順調
-                                <input type="radio" name="level" value="1" @if($shuho->level == 'normal') checked @endif>やや問題あり
-                                <input type="radio" name="level" value="2" @if($shuho->level == 'bad') checked @endif>問題あり
+                                <input type="radio" name="level" value="good" @if($shuho->level == 'good') checked  @endif>順調
+                                <input type="radio" name="level" value="normal" @if($shuho->level == 'normal') checked @endif>やや問題あり
+                                <input type="radio" name="level" value="bad" @if($shuho->level == 'bad') checked @endif>問題あり
                             </div>
                             </div>
 

@@ -26,7 +26,17 @@
                             <td class="px-4 py-3">{{ $shuho->id }}</td>
                             <td class="px-4 py-3">{{ $shuho->name }}</td>
                             <td class="px-4 py-3">{{ $shuho->created_at }}</td>
-                            <td class="px-4 py-3">{{ $checked[$shuho->id - 1] }}</td>
+                            @php
+                            if ($shuho->checked == false)
+                            {
+                                $strcheck = "未";
+                            }
+                            if ($shuho->checked == true)
+                            {
+                                $strcheck = "済";
+                            }
+                            @endphp
+                            <td class="px-4 py-3">{{ $strcheck }}</td>
                             <td class="px-4 py-3 text-blue-500"><a href="{{ route('shuhos.show',$shuho->id) }}">詳細を見る</a></td>
                         </tr>
                         @endforeach

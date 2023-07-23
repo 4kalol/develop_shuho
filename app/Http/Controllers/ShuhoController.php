@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Shuho;
+use App\Http\Requests\StoreShuhoRequest;
 
 class ShuhoController extends Controller
 {
@@ -23,21 +24,10 @@ class ShuhoController extends Controller
         // DBよりデータを取得
         $shuhos = Shuho::select('id', 'name', 'created_at' ,'checked')
         ->get();
-
-        // checked がtrueなら済,falseなら空文字になるようにする.
-        $checked = [];
-        foreach ($shuhos as $shuho){
-            if ($shuho->checked == true){
-                $checked[] = "済";
-            }
-            if ($shuho->checked == false){
-                $checked[] = "未";
-            }
-        }
         
         // return view('shuhos.index');
         //return view('shuhos.index', compact('shuhos'));
-        return view('shuhos.index', ['shuhos' => $shuhos, 'checked' => $checked]);
+        return view('shuhos.index', ['shuhos' => $shuhos]);
     }
 
     /**
@@ -56,7 +46,7 @@ class ShuhoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreShuhoRequest $request)
     {
         // dd($request);
 
@@ -104,8 +94,9 @@ class ShuhoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreShuhoRequest $request, $id)
     {
+        //dd($request);
         $shuho = Shuho::find($id);
         $shuho->name = $request->name;
         $shuho->level = $request->level;
@@ -126,6 +117,11 @@ class ShuhoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //dd($id);
+        $shuho = Shuho::find($id);
+        $shuho->delete();
+
+        // リダイレクト先(Store処理後に遷移する画面).
+        return redirect()->route('shuhos.index');
     }
 }

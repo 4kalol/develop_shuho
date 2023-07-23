@@ -9,6 +9,10 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
+
+                    <!-- Validation Errors -->
+                    <x-auth-validation-errors class="mb-4" :errors="$errors" />
+
                     <section class="text-gray-600 body-font relative">
                     <form method="post" action="{{ route('shuhos.store') }}">
                         @csrf
@@ -23,7 +27,7 @@
                             <div class="p-2 w-full">
                             <div class="relative">
                                 <label for="name" class="leading-7 text-sm text-gray-600">氏名</label>
-                                <input type="text" id="name" name="name" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                <input type="text" id="name" name="name" value="{{ old('name') }}" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                             </div>
                             </div>
 
@@ -31,9 +35,23 @@
                             <div class="p-2 w-full">
                             <div class="relative">
                                 <label for="level" class="leading-7 text-sm text-gray-600">順調度合い</label><br>
-                                <input type="radio" name="level" value="0">順調
-                                <input type="radio" name="level" value="1">やや問題あり
-                                <input type="radio" name="level" value="2">問題あり
+                                @php
+                                $isGoodChecked = "";
+                                $isNormalChecked = "";
+                                $isBadChecked = "";
+                                if (old('level') == "good"){
+                                    $isGoodChecked = "checked";
+                                }
+                                if (old('level') == "normal"){
+                                    $isNormalChecked = "checked";
+                                }
+                                if (old('level') == "bad"){
+                                    $isBadChecked = "checked";
+                                }
+                                @endphp
+                                <input type="radio" name="level" value="good" {{ $isGoodChecked }}>順調
+                                <input type="radio" name="level" value="normal" {{ $isNormalChecked }}>やや問題あり
+                                <input type="radio" name="level" value="bad" {{ $isBadChecked }}>問題あり
                             </div>
                             </div>
 
@@ -41,7 +59,7 @@
                             <div class="p-2 w-full">
                             <div class="relative">
                                 <label for="report" class="leading-7 text-sm text-gray-600">報告内容</label>
-                                <textarea id="report" name="report" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"></textarea>
+                                <textarea id="report" name="report" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out">{{ old('report') }}</textarea>
                             </div>
 
                             <!-- button(登録ボタン) -->
