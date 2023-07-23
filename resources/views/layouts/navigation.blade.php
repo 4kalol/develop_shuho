@@ -5,9 +5,9 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ route('shuhos.index') }}">
                         <!--<x-application-logo class="block h-10 w-auto fill-current text-blue-600" />-->
-                        <img src="{{ asset('storage/images/undraw_Diary_re_4jpc.png') }}" width="50" height="50">
+                        <img src="{{ asset('storage/images/sozai_Diary.png') }}" width="40" height="40">
                     </a>
                 </div>
 
