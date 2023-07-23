@@ -43,6 +43,9 @@
                         </tbody>
                     </table>
                     </div>
+                    <!-- add start -->
+                    {{ $shuhos->links() }}
+                    <!-- add end -->
                 </div>
             </div>
         </div>

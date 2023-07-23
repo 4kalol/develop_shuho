@@ -21,9 +21,15 @@ class ShuhoController extends Controller
 
     public function index()
     {
-        // DBよりデータを取得
+        // mod --->
+        // // DBよりデータを取得
+        // $shuhos = Shuho::select('id', 'name', 'created_at' ,'checked')
+        // ->get();
+
+        //↓　ぺジネーション対応
         $shuhos = Shuho::select('id', 'name', 'created_at' ,'checked')
-        ->get();
+        ->paginate(5);
+        // mod <---
         
         // return view('shuhos.index');
         //return view('shuhos.index', compact('shuhos'));
