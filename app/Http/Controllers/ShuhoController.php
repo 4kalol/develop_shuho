@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Shuho;
 use App\Http\Requests\StoreShuhoRequest;
+use Illuminate\Support\Facades\Auth; // Authクラスを使うために追加
+use App\Models\User;
 
 class ShuhoController extends Controller
 {
@@ -55,9 +57,13 @@ class ShuhoController extends Controller
     public function store(StoreShuhoRequest $request)
     {
         // dd($request);
+        $user_num = Auth::id();
+        $user = User::find($user_num);
+        $user_id = $user->id;
 
         // $user = User::create([
         $user = Shuho::create([
+            'user_id' => $user_id, // ログインしているユーザーのIDをuser_idカラムに保存
             'name' => $request->name,
             'level' => $request->level,
             'report' => $request->report,
