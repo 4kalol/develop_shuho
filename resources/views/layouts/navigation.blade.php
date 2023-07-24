@@ -6,8 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('shuhos.index') }}">
-                        <!--<x-application-logo class="block h-10 w-auto fill-current text-blue-600" />-->
-                        <img src="{{ asset('storage/images/sozai_Diary.png') }}" width="40" height="40">
+                        <img src="{{ asset('storage/images/clipboard-solid.svg') }}" width="30" height="30">
                     </a>
                 </div>
 
