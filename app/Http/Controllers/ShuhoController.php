@@ -24,18 +24,13 @@ class ShuhoController extends Controller
     public function index()
     {
         $user_id = Auth::id();
-        // //↓　ぺジネーション対応
-        // $shuhos = Shuho::select('id', 'name', 'created_at' ,'checked')
-        // ->paginate(5);
         $shuhos = Shuho::whereHas('user', function ($query) use ($user_id) {
             $query->where('id', $user_id);
-        })->select('id', 'name', 'created_at', 'checked')
+        })
+        ->orderBy('id', 'desc') // ここでidカラムを降順にソート
+        ->select('id', 'name', 'created_at', 'checked')
             ->paginate(5);
 
-
-        
-        // return view('shuhos.index');
-        //return view('shuhos.index', compact('shuhos'));
         return view('shuhos.index', ['shuhos' => $shuhos]);
     }
 

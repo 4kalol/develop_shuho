@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('shuhos.index') }}">
-                        <img src="{{ asset('storage/images/clipboard-solid.svg') }}" width="30" height="30">
+                        <img src="{{ asset('storage/images/ほうれん草アイコン.svg') }}" width="50" height="50">
                     </a>
                 </div>
 

@@ -18,17 +18,33 @@
             body {
                 font-family: 'Nunito', sans-serif;
             }
+
+            .centered-image {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 80px; /* 画像が真ん中に来るようにコンテナを全画面高さに設定 */
+            }
+
+            .centered-content {
+                text-align: center;
+            }
         </style>
     </head>
     <body class="antialiased">
+        
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-blue-900 sm:items-center py-4 sm:pt-0">
 
             <section class="text-gray-600 body-font">
             <div class="container mx-auto flex px-5 py-24 items-center justify-center flex-col">
-
+            
                 <div class="text-center lg:w-2/3 w-full">
-                <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">報告管理アプリへ、ようこそ！
+                <div class="centered-image">
+                <img src="{{ asset('storage/images/ほうれん草アイコン.svg') }}" alt="ほうれん草アイコン" class="w-16 h-16">
+                </div>
+                <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">Spinach へ、ようこそ！
                 </h1>
+                
                 <p class="mb-8 leading-relaxed">報告の登録,管理を行うことができるアプリです.</p>
                 <div class="flex justify-center">
                 @if (Route::has('login'))
