@@ -18,7 +18,7 @@ class ShuhoController extends Controller
 
      public function __construct()
      {
-         $this->middleware('auth');
+         $this->middleware('auth:users');
      }
 
     public function index()
@@ -31,7 +31,7 @@ class ShuhoController extends Controller
         ->select('id', 'name', 'created_at', 'checked')
             ->paginate(5);
 
-        return view('shuhos.index', ['shuhos' => $shuhos]);
+        return view('user.shuhos.index', ['shuhos' => $shuhos]);
     }
 
     /**
@@ -41,7 +41,7 @@ class ShuhoController extends Controller
      */
     public function create()
     {
-        return view('shuhos.create');
+        return view('user.shuhos.create');
     }
 
     /**
@@ -68,7 +68,7 @@ class ShuhoController extends Controller
         ]);
 
         // リダイレクト先(Store処理後に遷移する画面).
-        return to_route('shuhos.index');
+        return to_route('user.shuhos.index');
     }
 
     /**
@@ -80,7 +80,7 @@ class ShuhoController extends Controller
     public function show($id)
     {
         $shuho = Shuho::find($id);
-        return view('shuhos.show', compact('shuho'));
+        return view('user.shuhos.show', compact('shuho'));
     }
 
     /**
@@ -92,7 +92,7 @@ class ShuhoController extends Controller
     public function edit($id)
     {
         $shuho = Shuho::find($id);
-        return view('shuhos.edit', compact('shuho'));
+        return view('user.shuhos.edit', compact('shuho'));
     }
 
     /**
@@ -114,7 +114,7 @@ class ShuhoController extends Controller
         $shuho->save();
 
         // リダイレクト先(Store処理後に遷移する画面).
-        return redirect()->route('shuhos.index');
+        return redirect()->route('user.shuhos.index');
     }
 
     /**
@@ -130,6 +130,6 @@ class ShuhoController extends Controller
         $shuho->delete();
 
         // リダイレクト先(Store処理後に遷移する画面).
-        return redirect()->route('shuhos.index');
+        return redirect()->route('user.shuhos.index');
     }
 }

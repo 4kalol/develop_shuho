@@ -58,7 +58,7 @@ class LoginRequest extends FormRequest
         }
         else
         {
-            $guard = 'users.';  //auth.php の guards名.
+            $guard = 'users';  //auth.php の guards名.
         }
 
         if (! Auth::guard($guard)->attempt($this->only('email', 'password'), $this->boolean('remember'))) {
