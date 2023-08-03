@@ -56,6 +56,7 @@
                     @endif
                     @endauth
                 @endif
+                <a href="http://127.0.0.1:8000" class="text-blue-500">報告者の方</a>
                 </div>
                 </div>
             </div>
