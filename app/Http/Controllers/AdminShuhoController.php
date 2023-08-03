@@ -6,9 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\Shuho;
 use App\Http\Requests\StoreShuhoRequest;
 use Illuminate\Support\Facades\Auth; // Authクラスを使うために追加
+use App\Models\Admin;
 use App\Models\User;
 
-class ShuhoController extends Controller
+class AdminShuhoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,20 +19,16 @@ class ShuhoController extends Controller
 
      public function __construct()
      {
-        $this->middleware('auth:users');
+        $this->middleware('auth:admins');
      }
 
     public function index()
     {
-        $user_id = Auth::id();
-        $shuhos = Shuho::whereHas('user', function ($query) use ($user_id) {
-            $query->where('id', $user_id);
-        })
-        ->orderBy('id', 'desc') // ここでidカラムを降順にソート
-        ->select('id', 'name', 'created_at', 'checked')
+        $users = Shuho::select('id', 'name', 'created_at', 'checked')
+            ->orderBy('created_at', 'desc')
             ->paginate(5);
 
-        return view('user.shuhos.index', ['shuhos' => $shuhos]);
+        return view('admin.shuhos.index', ['users' => $users]);
     }
 
     /**
@@ -41,7 +38,7 @@ class ShuhoController extends Controller
      */
     public function create()
     {
-        return view('user.shuhos.create');
+        return view('admin.shuhos.create');
     }
 
     /**
@@ -68,7 +65,7 @@ class ShuhoController extends Controller
         ]);
 
         // リダイレクト先(Store処理後に遷移する画面).
-        return to_route('user.shuhos.index');
+        return to_route('admin.shuhos.index');
     }
 
     /**
@@ -80,7 +77,7 @@ class ShuhoController extends Controller
     public function show($id)
     {
         $shuho = Shuho::find($id);
-        return view('user.shuhos.show', compact('shuho'));
+        return view('admin.shuhos.show', compact('shuho'));
     }
 
     /**
@@ -92,7 +89,7 @@ class ShuhoController extends Controller
     public function edit($id)
     {
         $shuho = Shuho::find($id);
-        return view('user.shuhos.edit', compact('shuho'));
+        return view('admin.shuhos.edit', compact('shuho'));
     }
 
     /**
@@ -114,7 +111,7 @@ class ShuhoController extends Controller
         $shuho->save();
 
         // リダイレクト先(Store処理後に遷移する画面).
-        return redirect()->route('user.shuhos.index');
+        return redirect()->route('admin.shuhos.index');
     }
 
     /**
@@ -130,6 +127,6 @@ class ShuhoController extends Controller
         $shuho->delete();
 
         // リダイレクト先(Store処理後に遷移する画面).
-        return redirect()->route('user.shuhos.index');
+        return redirect()->route('admin.shuhos.index');
     }
 }

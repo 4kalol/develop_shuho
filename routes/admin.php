@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Admin\Auth\RegisteredUserController;
 use App\Http\Controllers\Admin\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminShuhoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::resource('admin/shuhos', AdminShuhoController::class);
 
 Route::get('/', function () {
     return view('admin.welcome');

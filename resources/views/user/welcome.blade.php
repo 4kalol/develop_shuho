@@ -56,6 +56,7 @@
                     @endif
                     @endauth
                 @endif
+                <a href="http://127.0.0.1:8000/admin" class="text-blue-500">管理者の方</a>
                 </div>
                 </div>
             </div>
