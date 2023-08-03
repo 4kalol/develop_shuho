@@ -54,7 +54,7 @@ class LoginRequest extends FormRequest
         // }
 
         if ($this->routeIs('admin.*')){
-            $guard = 'admins.'; //auth.php の guards名.
+            $guard = 'admins'; //auth.php の guards名.
         }
         else
         {
