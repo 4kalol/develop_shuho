@@ -105,10 +105,10 @@
                             </div>
 
                         </div>
+                        <a href="{{ route('user.shuhos.index') }}" class="text-blue-500">キャンセル</a>
                         </div>
                     </div>
                     </section>
-                    <a href="{{ route('user.shuhos.index') }}" class="text-blue-500">キャンセル</a>
                 </div>
             </div>
         </div>

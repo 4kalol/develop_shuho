@@ -43,13 +43,15 @@
                             if ($user->checked == false)
                             {
                                 $strcheck = "未";
+                                $colorcheck = "text-red-400";
                             }
                             if ($user->checked == true)
                             {
                                 $strcheck = "済";
+                                $colorcheck = "text-green-400";
                             }
                             @endphp
-                            <td class="px-4 py-3 hover:text-blue-500"><a href="{{ route('admin.shuhos.checkSub',$user->id) }}">{{ $strcheck }}</a></td>
+                            <td class="px-4 py-3 {{ $colorcheck }} hover:text-blue-500"><a href="{{ route('admin.shuhos.checkSub',$user->id) }}">{{ $strcheck }}</a></td>
                             <td class="px-4 py-3 hover:text-blue-500"><a href="{{ route('admin.shuhos.show',$user->id) }}">詳細を見る</a></td>
                         </tr>
                         @endforeach

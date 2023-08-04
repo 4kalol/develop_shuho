@@ -13,7 +13,6 @@
                     <table class="table-auto w-full text-left whitespace-no-wrap">
                         <thead>
                         <tr>
-                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">id</th>
                             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">氏名</th>
                             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">作成日</th>
                             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">承認</th>
@@ -23,21 +22,22 @@
                         <tbody>
                         @foreach($shuhos as $shuho)
                         <tr>
-                            <td class="px-4 py-3">{{ $shuho->id }}</td>
                             <td class="px-4 py-3">{{ $shuho->name }}</td>
                             <td class="px-4 py-3">{{ $shuho->created_at }}</td>
                             @php
                             if ($shuho->checked == false)
                             {
                                 $strcheck = "未";
+                                $colorcheck = "text-red-400";
                             }
                             if ($shuho->checked == true)
                             {
                                 $strcheck = "済";
+                                $colorcheck = "text-green-400";
                             }
                             @endphp
-                            <td class="px-4 py-3">{{ $strcheck }}</td>
-                            <td class="px-4 py-3 text-blue-500"><a href="{{ route('user.shuhos.show',$shuho->id) }}">詳細を見る</a></td>
+                            <td class="px-4 py-3 {{ $colorcheck }}">{{ $strcheck }}</td>
+                            <td class="px-4 py-3 hover:text-blue-500"><a href="{{ route('user.shuhos.show',$shuho->id) }}">詳細を見る</a></td>
                         </tr>
                         @endforeach
                         </tbody>
