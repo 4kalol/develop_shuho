@@ -44,12 +44,33 @@
                 font-size: 14px;
             }
 
+            .select-buttons {
+                margin-top: 40px;
+            }
+
+            .select-button {
+                font-size: 20px;
+                margin-right: 15px;
+                margin-left: 15px;
+                padding-top: 5px;
+                padding-bottom: 5px;
+                border: 1px solid transparent;
+            }
+
             .select-button:hover {
                 color: #2e8b57;
+                font-weight: 800;
+                border: 1px solid #2e8b57; /* ホバー時に境界線を表示 */
             }
 
             .title-comment {
                 color: #2e8b57;
+            }
+
+            .select-button-admin {
+                text-align: right;
+                margin-top: 120px;
+                margin-right: 35px;
             }
 
         </style>
@@ -65,11 +86,11 @@
                 <div class="centered-image">
                 <img src="{{ asset('storage/images/ほうれん草アイコン.svg') }}" alt="ほうれん草アイコン" class="w-16 h-16">
                 </div>
-                <h1 class="title-comment title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">Spinach へ、ようこそ！
+                <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900"><span class="title-comment">Spinach</span> へ ようこそ！
                 </h1>
                 
-                <p class="welcome-comment mb-8 leading-relaxed">こちらからは報告の登録を行うことができます.</p>
-                <div class="flex justify-center">
+                <p class="welcome-comment mb-8 leading-relaxed">こちらからは報告の登録を行うことができます</p>
+                <div class="select-buttons flex justify-center">
                 @if (Route::has('user.login'))
                     @auth('users')  
                     @else
@@ -82,7 +103,9 @@
                 </div>
                 <br>
                 <br>
-                <a href="http://127.0.0.1:8000/admin" class="user-select text-blue-500">『管理者』の方はこちら</a>
+                <div class="select-button-admin">
+                <a href="http://127.0.0.1:8000/admin" class="user-select">『管理者』の方はこちら</a>
+                </div>
                 </div>
             </div>
             </section>

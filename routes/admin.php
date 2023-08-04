@@ -27,6 +27,14 @@ Route::get('/', function () {
     return view('admin.welcome');
 });
 
+// 管理者用 承認機能ルート
+// 詳細画面からのアクション
+Route::get('/admin/shuhos/check/{id}', [AdminShuhoController::class, 'checkShuho'])
+    ->name('shuhos.check');
+// メイン画面からの簡易アクション
+Route::get('/admin/shuhos/checkSub/{id}', [AdminShuhoController::class, 'checkShuhoSub'])
+    ->name('shuhos.checkSub');
+
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
 })->middleware(['auth:admins'])->name('dashboard');

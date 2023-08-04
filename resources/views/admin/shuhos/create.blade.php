@@ -73,7 +73,7 @@
                     </div>
                     </form>
                     </section>
-                    <a href="{{ route('user.shuhos.index') }}" class="text-blue-500">キャンセル</a>
+                    <a href="{{ route('admin.shuhos.index') }}" class="text-blue-500">キャンセル</a>
                 </div>
             </div>
         </div>

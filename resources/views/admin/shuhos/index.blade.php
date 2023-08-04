@@ -13,9 +13,9 @@
                     <table class="table-auto w-full text-left whitespace-no-wrap">
                         <thead>
                         <tr>
-                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">id</th>
                             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">氏名</th>
                             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">作成日</th>
+                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">状況</th>
                             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">承認</th>
                             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">詳細</th>
                         </tr>
@@ -23,9 +23,22 @@
                         <tbody>
                         @foreach($users as $user)
                         <tr>
-                            <td class="px-4 py-3">{{ $user->id }}</td>
                             <td class="px-4 py-3">{{ $user->name }}</td>
                             <td class="px-4 py-3">{{ $user->created_at }}</td>
+                            @php
+                            $level = $user->level;
+                            $strLevel = ''; // 初期化
+                            if ($level == 'good'){
+                                $strLevel = '順調';
+                            }
+                            if ($level == 'normal'){
+                                $strLevel = 'やや問題';
+                            }
+                            if ($level == 'bad'){
+                              $strLevel = '問題あり';
+                            }
+                            @endphp
+                            <td class="px-4 py-3">{{ $strLevel }}</td>
                             @php
                             if ($user->checked == false)
                             {
@@ -36,8 +49,8 @@
                                 $strcheck = "済";
                             }
                             @endphp
-                            <td class="px-4 py-3">{{ $strcheck }}</td>
-                            <td class="px-4 py-3 text-blue-500"><a href="{{ route('admin.shuhos.show',$user->id) }}">詳細を見る</a></td>
+                            <td class="px-4 py-3 hover:text-blue-500"><a href="{{ route('admin.shuhos.checkSub',$user->id) }}">{{ $strcheck }}</a></td>
+                            <td class="px-4 py-3 hover:text-blue-500"><a href="{{ route('admin.shuhos.show',$user->id) }}">詳細を見る</a></td>
                         </tr>
                         @endforeach
                         </tbody>

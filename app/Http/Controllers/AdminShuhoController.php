@@ -24,7 +24,7 @@ class AdminShuhoController extends Controller
 
     public function index()
     {
-        $users = Shuho::select('id', 'name', 'created_at', 'checked')
+        $users = Shuho::select('id', 'name', 'created_at','level', 'checked')
             ->orderBy('created_at', 'desc')
             ->paginate(5);
 
@@ -128,5 +128,33 @@ class AdminShuhoController extends Controller
 
         // リダイレクト先(Store処理後に遷移する画面).
         return redirect()->route('admin.shuhos.index');
+    }
+
+    //詳細画面からの承認操作
+    public function checkShuho($id)
+    {
+        $shuho = Shuho::find($id);
+        if ($shuho->checked == 0) {
+            $shuho->checked = 1;
+        }
+        elseif ($shuho->checked == 1) {
+            $shuho->checked = 0;
+        }
+        $shuho->save();
+        return redirect()->route('admin.shuhos.show', compact('shuho'));
+    }
+
+    //メイン画面からの簡易承認操作
+    public function checkShuhoSub($id)
+    {
+        $shuho = Shuho::find($id);
+        if ($shuho->checked == 0) {
+            $shuho->checked = 1;
+        }
+        elseif ($shuho->checked == 1) {
+            $shuho->checked = 0;
+        }
+        $shuho->save();
+        return redirect()->route('admin.shuhos.index', compact('shuho'));
     }
 }

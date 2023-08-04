@@ -21,9 +21,19 @@
                 @include('layouts.user-navigation')
             @endif
             <!-- Page Heading -->
-            <header class="bg-white shadow">
+            <header class="shadow">
+            @php
+            $barColor = '';
+            if (auth('admins')->check()) {
+                $barColor = 'bg-yellow-100';
+            } elseif (auth('users')->check()) {
+                $barColor = 'bg-green-100';
+            }
+            @endphp
+                <div class="{{ $barColor }} ">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                     {{ $header }}
+                </div>
                 </div>
             </header>
 

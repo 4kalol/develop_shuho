@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('週報まとめる君') }}
+            {{ __('Spinach') }}
         </h2>
     </x-slot>
 
@@ -91,24 +91,33 @@
                             </div>
                             </div>
 
-                            <!-- button(編集ボタン) -->
+                            <!-- button(承認ボタン) -->
                             <!-- button(削除ボタン) -->
                             </div>
                             <div class="p-2">
-                            <a href="{{ route('user.shuhos.edit',$shuho->id) }}" class="w-1/4 flex mx-auto my-1 text-white bg-indigo-500 border-0 flex justify-center ... focus:outline-none hover:bg-indigo-600 rounded text-lg">編集</a>
+                              @php
+                              $check = $shuho->checked;
+                              if ($check == 0){
+                                $buttonCheck = '承認';
+                              }
+                              if ($check == 1){
+                                $buttonCheck = '承認取り消し';
+                              }
+                              @endphp
+                            <a href="{{ route('admin.shuhos.check',$shuho->id) }}" class="w-1/4 flex mx-auto my-1 text-white bg-indigo-500 border-0 flex justify-center ... focus:outline-none hover:bg-indigo-600 rounded text-lg">{{ $buttonCheck }}</a>
                             <!-- 削除ボタン用にDELETEメソッドを持つフォームを使用 -->
-                            <form action="{{ route('user.shuhos.destroy', $shuho->id) }}" method="POST" onsubmit="return confirm('本当に削除してもよろしいですか？');">
+                            <form action="{{ route('admin.shuhos.destroy', $shuho->id) }}" method="POST" onsubmit="return confirm('本当に削除してもよろしいですか？');">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="w-1/4 flex mx-auto text-white bg-pink-500 border-0 flex justify-center ... focus:outline-none hover:bg-pink-600 rounded text-lg">削除</button>
                             </form>
                             </div>
-
                         </div>
+                        <a href="{{ route('admin.shuhos.index') }}" class="text-blue-500">キャンセル</a>
                         </div>
                     </div>
                     </section>
-                    <a href="{{ route('user.shuhos.index') }}" class="text-blue-500">キャンセル</a>
+                    
                 </div>
             </div>
         </div>
