@@ -35,6 +35,13 @@ Route::get('/admin/shuhos/check/{id}', [AdminShuhoController::class, 'checkShuho
 Route::get('/admin/shuhos/checkSub/{id}', [AdminShuhoController::class, 'checkShuhoSub'])
     ->name('shuhos.checkSub');
 
+// 管理者用 コメント機能ON
+Route::get('/admin/shuhos/comment/{id}', [AdminShuhoController::class, 'comment'])
+    ->name('shuhos.comment');
+// 管理者用 コメント入力更新
+Route::put('/admin/shuhos/commentUpdate/{id}', [AdminShuhoController::class, 'commentUpdate'])
+    ->name('shuhos.commentUpdate');
+
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
 })->middleware(['auth:admins'])->name('dashboard');

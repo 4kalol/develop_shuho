@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Shuho;
 use App\Http\Requests\StoreShuhoRequest;
+use App\Http\Requests\UpdateCommentRequest;
 use Illuminate\Support\Facades\Auth; // Authクラスを使うために追加
 use App\Models\Admin;
 use App\Models\User;
@@ -156,5 +157,22 @@ class AdminShuhoController extends Controller
         }
         $shuho->save();
         return redirect()->route('admin.shuhos.index', compact('shuho'));
+    }
+
+    //コメントボタン押下時
+    public function comment($id)
+    {
+        $shuho = Shuho::find($id);
+        return view('admin.shuhos.comment', compact('shuho'));
+    }
+
+    //コメント入力ボタン押下時
+    public function commentUpdate(UpdateCommentRequest $request, $id)
+    {
+        $shuho = Shuho::find($id);
+        $shuho->comment = $request->comment;
+        $shuho->save();
+
+        return redirect()->route('admin.shuhos.show', compact('shuho'));
     }
 }

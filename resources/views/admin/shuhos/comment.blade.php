@@ -10,9 +10,12 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <section class="text-gray-600 body-font relative">
+                    
+
+
                     <div class="container px-5 mx-auto">
-                        <div class="flex flex-col text-center w-full mb-12">
-                        <p class="lg:w-2/3 mx-auto leading-relaxed text-base">詳細画面</p>
+                    <div class="flex flex-col text-center w-full mb-12">
+                        <p class="lg:w-2/3 mx-auto leading-relaxed text-base">コメント入力画面</p>
                         </div>
                         <div class="lg:w-1/2 md:w-2/3 mx-auto">
                         <div class="flex flex-wrap -m-2">
@@ -82,38 +85,40 @@
                                 <p id="checked" name="checked" class="w-full bg-white-100 bg-opacity-50 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">{{ $strCheck }}</p>
                             </div>
                             </div>
+                    </div>
+                    <div class="border-2 mb-8 mt-4">
+                    </div>
 
-                            <!-- comment(上長コメント) -->
-                            <div class="p-2 w-full">
+                    <!-- Validation Errors -->
+                    <x-auth-validation-errors class="mb-4" :errors="$errors" />
+                    
+                    <form method="post" action="{{ route('admin.shuhos.commentUpdate', $shuho->id) }}">
+                        @csrf
+                        @method('PUT')
+                    <div class="container px-1">
+                        
+                        <div class="w-full">
+                        <div class="flex flex-wrap -m-2">
+
+                            <!-- comment(コメント内容) -->
+                            <div class="w-full">
                             <div class="relative">
-                              <label for="comment" class="leading-7 text-sm text-gray-600">確認コメント</label>
-                              <p id="comment" name="comment" class="w-full bg-white-100 bg-opacity-50 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">{{ $shuho->comment }}</p>
-                            </div>
+                                <label for="comment" class="leading-7 text-sm text-gray-600 text-left">コメント内容</label>
+                                <textarea id="comment" name="comment" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out">{{ $shuho->comment }}</textarea>
                             </div>
 
-                            <!-- button(承認ボタン) -->
-                            <!-- button(コメントボタン) -->
                             </div>
-                            <div class="p-2">
-                              @php
-                              $check = $shuho->checked;
-                              if ($check == 0){
-                                $buttonCheck = '承認';
-                              }
-                              if ($check == 1){
-                                $buttonCheck = '承認取り消し';
-                              }
-                              @endphp
-                            <a href="{{ route('admin.shuhos.check',$shuho->id) }}" class="w-1/4 flex mx-auto my-1 text-white bg-indigo-500 border-0 flex justify-center ... focus:outline-none hover:bg-indigo-600 rounded text-lg">{{ $buttonCheck }}</a>
+                            <!-- button(登録ボタン) -->
+                            <div class="p-2 w-full">
+                            <button class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">入力</button>
+                            </div>
 
-                            <a href="{{ route('admin.shuhos.comment', $shuho->id) }}" class="w-1/4 flex mx-auto my-1 text-white bg-indigo-500 border-0 flex justify-center ... focus:outline-none hover:bg-indigo-600 rounded text-lg">コメント</a>
-                            </div>
                         </div>
-                        <a href="{{ route('admin.shuhos.index') }}" class="text-blue-500">キャンセル</a>
                         </div>
                     </div>
+                    </form>
                     </section>
-                    
+                    <a href="{{ route('admin.shuhos.show', $shuho->id) }}" class="text-blue-500">キャンセル</a>
                 </div>
             </div>
         </div>
