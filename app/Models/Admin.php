@@ -10,7 +10,6 @@ class Admin extends Authenticatable
 {
     use HasFactory;
 
-    // add ---> User.php
     /**
      * The attributes that are mass assignable.
      *
@@ -40,5 +39,9 @@ class Admin extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    // add <---
+
+    public function unitUser()
+    {
+        return $this->hasOne(UnitUser::class, 'admin_id');
+    }
 }

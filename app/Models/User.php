@@ -47,4 +47,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Shuho::class);
     }
+
+    public function unitUser()
+    {
+        return $this->hasOne(UnitUser::class, 'user_id');
+    }
 }
