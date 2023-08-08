@@ -9,6 +9,8 @@ use App\Http\Requests\UpdateCommentRequest;
 use Illuminate\Support\Facades\Auth; // Authクラスを使うために追加
 use App\Models\Admin;
 use App\Models\User;
+use App\Models\UnitUser;
+use App\Models\GroupUser;
 
 class AdminShuhoController extends Controller
 {
@@ -25,11 +27,50 @@ class AdminShuhoController extends Controller
 
     public function index()
     {
-        $users = Shuho::select('id', 'name', 'created_at','level', 'checked')
-            ->orderBy('created_at', 'desc')
-            ->paginate(5);
+        dd('test');
+        // 現在のユーザのunit_usersテーブルのidを取得
+        $currentUnitUserId = $this->getCurrentAdminUnitUserId();
 
-        return view('admin.shuhos.index', ['users' => $users]);
+        // $currentUnitUserIdを使用してgroup_userテーブルより
+        // ログインユーザのレコードを取得する
+        $currentUserRecord = GroupUser::where('user_id', $currentUnitUserId)->first();
+        if ($currentUserRecord) {
+            $currentGroupId = $currentUserRecord->group_id;
+
+            // $currentGroupIdと一致するgroup_userテーブルのuser_idを取得
+            $userIds = GroupUser::where('group_id', $currentGroupId)->pluck('user_id')->toArray();
+
+            // $userIdsとunit_usersテーブルのidが一致するusers_idを取得
+            $unitUserIds = UnitUser::whereIn('id', $userIds)->pluck('users_id')->toArray();
+
+            // $unitUserIdsとusersテーブルのidが一致するデータを取得
+            $users = User::whereIn('id', $unitUserIds)->get();
+
+            // $usersのidとshuhosテーブルのuser_idが一致するデータを取得
+            $shuhos = Shuho::whereIn('user_id', $users->pluck('id'))
+                    ->select('id', 'name', 'created_at', 'level', 'checked')->get()
+                    ->orderBy('created_at', 'desc')
+                    ->paginate(5);
+            
+            // 暫定でViewファイルに渡す際の変数名を以前のものに治します
+            $users = $shuhos;
+
+            return view('admin.shuhos.index', ['users' => $users]);
+        }
+    }
+
+    public function getCurrentAdminUnitUserId()
+    {
+        // 現在ログイン中の管理者ユーザー情報を取得
+        $currentAdmin = Auth::guard('admins')->user();
+
+        // 管理者ユーザーがunit_usersテーブルに紐づいている場合は、unit_usersテーブルのidを取得
+        $unitUserId = null;
+        if ($currentAdmin && $currentAdmin->unitUser) {
+            $unitUserId = $currentAdmin->unitUser->id;
+        }
+
+        return $unitUserId;
     }
 
     /**

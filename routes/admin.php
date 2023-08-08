@@ -42,9 +42,13 @@ Route::get('/admin/shuhos/comment/{id}', [AdminShuhoController::class, 'comment'
 Route::put('/admin/shuhos/commentUpdate/{id}', [AdminShuhoController::class, 'commentUpdate'])
     ->name('shuhos.commentUpdate');
 
-Route::get('/dashboard', function () {
-    return view('admin.dashboard');
-})->middleware(['auth:admins'])->name('dashboard');
+// Route::get('/admin/shuhos', function () {
+//     return view('admin.dashboard');
+// })->middleware(['auth:admins'])->name('dashboard');
+
+Route::get('/admin/shuhos/index', [AdminShuhoController::class, 'index'])
+    ->middleware(['auth:admins'])
+    ->name('admin.shuhos.index');
 
 
 Route::middleware('guest')->group(function () {

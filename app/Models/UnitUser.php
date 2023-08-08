@@ -10,8 +10,8 @@ class UnitUser extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
-        'admin_id',
+        'users_id',
+        'admins_id',
     ];
 
     public function user()
@@ -28,4 +28,6 @@ class UnitUser extends Model
     {
         return $this->belongsToMany(Group::class, 'group_user', 'user_id', 'group_id');
     }
+
+    public $timestamps = false;
 }

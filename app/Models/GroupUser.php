@@ -23,4 +23,6 @@ class GroupUser extends Model
     {
         return $this->belongsTo(Group::class, 'group_id'); // Groupモデルとのリレーションを定義
     }
+
+    public $timestamps = false;
 }

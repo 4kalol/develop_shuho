@@ -18,4 +18,6 @@ class Group extends Model
     {
         return $this->belongsToMany(UnitUser::class, 'group_user', 'group_id', 'user_id');
     }
+
+    public $timestamps = false;
 }

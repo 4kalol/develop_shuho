@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('unit_users', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('users_id');
-            $table->unsignedBigInteger('admins_id');
+            $table->unsignedBigInteger('users_id')->nullable();
+            $table->unsignedBigInteger('admins_id')->nullable();
             $table->foreign('users_id')
                   ->references('id')        // 参照先のテーブルのカラム（ここではusersテーブルのidカラム）を指定
                   ->on('users')

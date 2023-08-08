@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
+use App\Models\UnitUser;
+use App\Models\GroupUser;
+use App\Models\Group;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -45,10 +48,33 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        $this->RegisterRelatedData($user);
+
         event(new Registered($user));
 
         Auth::guard('admins')->login($user);
 
-        return redirect(RouteServiceProvider::ADMIN_HOME);
+        // return redirect(RouteServiceProvider::ADMIN_HOME);
+        return redirect()->to('/admin/shuhos/index');
+    }
+
+    public function RegisterRelatedData($adminData)
+    {
+        // unit_usersテーブルへの反映.
+        $unitUser = UnitUser::create([
+            'users_id' => null,
+            'admins_id' => $adminData->id,
+        ]);
+
+        // groupsテーブルへの反映.
+        $group = Group::create([
+            'name' => '',
+        ]);
+
+        // group_userテーブルへの反映.
+        $groupUser = GroupUser::create([
+            'user_id' => $unitUser->id,
+            'group_id' => $group->id,
+        ]);
     }
 }
