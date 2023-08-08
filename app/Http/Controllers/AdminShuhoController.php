@@ -27,7 +27,6 @@ class AdminShuhoController extends Controller
 
     public function index()
     {
-        dd('test');
         // 現在のユーザのunit_usersテーブルのidを取得
         $currentUnitUserId = $this->getCurrentAdminUnitUserId();
 

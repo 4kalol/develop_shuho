@@ -55,7 +55,7 @@ class RegisteredUserController extends Controller
         Auth::guard('admins')->login($user);
 
         // return redirect(RouteServiceProvider::ADMIN_HOME);
-        return redirect()->to('/admin/shuhos/index');
+        return redirect()->to('/admin/admin/shuhos/');
     }
 
     public function RegisterRelatedData($adminData)
