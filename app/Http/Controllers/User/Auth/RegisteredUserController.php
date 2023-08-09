@@ -4,6 +4,9 @@ namespace App\Http\Controllers\User\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\UnitUser;
+use App\Models\Group;
+use App\Models\GroupUser;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -44,11 +47,29 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-
+        
+        $this->RegisterRelatedData($user);
         event(new Registered($user));
 
         Auth::guard('users')->login($user);
 
         return redirect(RouteServiceProvider::HOME);
+    }
+
+    public function RegisterRelatedData($userData)
+    {
+        $unitUser = UnitUser::create([
+            'users_id' => $userData->id,
+            'admins_id' => null,
+        ]);
+
+        $group = Group::create([
+            'name' => '',
+        ]);
+
+        $groupUser = GroupUser::create([
+            'user_id' => $unitUser->id,
+            'group_id' => $group->id,
+        ]);
     }
 }

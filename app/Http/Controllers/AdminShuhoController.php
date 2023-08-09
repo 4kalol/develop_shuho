@@ -47,7 +47,7 @@ class AdminShuhoController extends Controller
 
             // $usersのidとshuhosテーブルのuser_idが一致するデータを取得
             $shuhos = Shuho::whereIn('user_id', $users->pluck('id'))
-                    ->select('id', 'name', 'created_at', 'level', 'checked')->get()
+                    ->select('id', 'name', 'created_at', 'level', 'checked')
                     ->orderBy('created_at', 'desc')
                     ->paginate(5);
             
@@ -62,14 +62,16 @@ class AdminShuhoController extends Controller
     {
         // 現在ログイン中の管理者ユーザー情報を取得
         $currentAdmin = Auth::guard('admins')->user();
+        if ($currentAdmin) {
+                $currentUnitUser = UnitUser::Where('admins_id', $currentAdmin->id)->first();
 
-        // 管理者ユーザーがunit_usersテーブルに紐づいている場合は、unit_usersテーブルのidを取得
-        $unitUserId = null;
-        if ($currentAdmin && $currentAdmin->unitUser) {
-            $unitUserId = $currentAdmin->unitUser->id;
+            // 管理者ユーザーがunit_usersテーブルに紐づいている場合は、unit_usersテーブルのidを取得
+            if ($currentUnitUser) {
+                $unitUserId = $currentUnitUser->id;
+                return $unitUserId;
+            }
         }
-
-        return $unitUserId;
+        return null;
     }
 
     /**
