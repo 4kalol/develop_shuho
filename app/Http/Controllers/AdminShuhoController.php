@@ -232,4 +232,28 @@ class AdminShuhoController extends Controller
 
         return view('admin.shuhos.invite', compact('currentGroupDatas'));
     }
+
+    public function group()
+    {
+        return view ('admin.shuhos.group');
+    }
+
+    public function groupcreation(Request $request)
+    {
+        // 現在のユーザのunit_usersテーブルのidを取得
+        $currentUnitUserId = $this->getCurrentAdminUnitUserId();
+        // unit_usersテーブルのidから紐づくgroup_userテーブルgroup_idを全て取得
+        $currentUserGroupDatas = GroupUser::where('user_id', $currentUnitUserId)->get();
+        // group_idを使用してgroupsテーブルの該当データを取得
+        $groupIds = $currentUserGroupDatas->pluck('group_id'); // group_idを配列として取得
+        $inviteGroupDatas = Group::whereIn('id', $groupIds)->get();
+
+
+        // 該当データのnameカラムをフォームから送信されたグループ名に更新
+        $inviteGroupDatas->each(function ($group) use ($request) {
+        $group->update(['name' => $request->group]);
+        });
+
+        return to_route('admin.shuhos.index')->with('success', 'グループが作成されました');
+    }
 }

@@ -15,6 +15,9 @@
                     <x-nav-link :href="route('admin.shuhos.index')" :active="request()->routeIs('admin.shuhos.index')">
                         ホーム
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.shuhos.group')" :active="request()->routeIs('admin.shuhos.group')">
+                        グループ
+                    </x-nav-link>
                     <x-nav-link :href="route('admin.shuhos.invite')" :active="request()->routeIs('admin.shuhos.invite')">
                         招待
                     </x-nav-link>

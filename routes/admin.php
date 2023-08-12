@@ -24,7 +24,15 @@ use App\Http\Controllers\AdminShuhoController;
 // ナビゲーションよりinvite押下時
 Route::get('admin/shuhos/invite', [AdminShuhoController::class, 'invite'])
     ->name('shuhos.invite');
-    
+
+// ナビゲーションよりgroup押下時
+Route::get('admin/shuhos/group', [AdminShuhoController::class, 'group'])
+    ->name('shuhos.group');
+
+// グループ作成ボタン押下時
+Route::post('admin/shuhos/groupcreation', [AdminShuhoController::class, 'groupcreation'])
+    ->name('shuhos.groupcreation');
+
 Route::resource('admin/shuhos', AdminShuhoController::class);
 
 Route::get('/', function () {
