@@ -12,14 +12,11 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <!-- <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link> -->
                     <x-nav-link :href="route('admin.shuhos.index')" :active="request()->routeIs('admin.shuhos.index')">
                         ホーム
                     </x-nav-link>
-                    <x-nav-link :href="route('admin.shuhos.create')" :active="request()->routeIs('admin.shuhos.create')">
-                        新規作成
+                    <x-nav-link :href="route('admin.shuhos.invite')" :active="request()->routeIs('admin.shuhos.invite')">
+                        招待
                     </x-nav-link>
                 </div>
             </div>

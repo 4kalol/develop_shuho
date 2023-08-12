@@ -11,6 +11,7 @@ use App\Models\Admin;
 use App\Models\User;
 use App\Models\UnitUser;
 use App\Models\GroupUser;
+use App\Models\Group;
 
 class AdminShuhoController extends Controller
 {
@@ -119,6 +120,7 @@ class AdminShuhoController extends Controller
      */
     public function show($id)
     {
+        dd('show');
         $shuho = Shuho::find($id);
         return view('admin.shuhos.show', compact('shuho'));
     }
@@ -216,5 +218,18 @@ class AdminShuhoController extends Controller
         $shuho->save();
 
         return redirect()->route('admin.shuhos.show', compact('shuho'));
+    }
+
+    public function invite()
+    {
+        // 現在のユーザのunit_usersテーブルのidを取得
+        $currentUnitUserId = $this->getCurrentAdminUnitUserId();
+        // unit_usersテーブルのidから紐づくgroup_userテーブルgroup_idを全て取得
+        $currentUserGroupDatas = GroupUser::where('user_id', $currentUnitUserId)->get();
+        // 上記取得したgroup_idのgroupsテーブルデータを取得
+        $currentGroupIds = $currentUserGroupDatas->pluck('group_id');
+        $currentGroupDatas = Group::whereIn('id', $currentGroupIds)->get();
+
+        return view('admin.shuhos.invite', compact('currentGroupDatas'));
     }
 }
