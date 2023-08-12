@@ -14,7 +14,7 @@
                     <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
                     <section class="text-gray-600 body-font relative">
-                    <form method="post" action="{{ route('user.shuhos.store') }}">
+                    <form method="post" action="{{ route('admin.shuhos.inviterun') }}">
                         @csrf
                     <div class="container px-5 mx-auto">
                         <div class="flex flex-col text-center w-full mb-12">
@@ -38,16 +38,14 @@
                                 @php
                                 $groupDatas = [];
                                 foreach ($currentGroupDatas as $currentGroupData){
-                                  if ($currentGroupData->name == ""){
-                                    continue;
+                                  if ($currentGroupData->name != ""){
+                                    $groupDatas[] = $currentGroupData;
                                   }
-                                  $groupDatas = $currentGroupData;
                                 } 
                                 @endphp
 
                                 @if (empty($groupDatas))
                                 招待可能なグループがありません。
-
                                 @else                             
                                   @foreach ($groupDatas as $groupData)
                                   <input type="radio" name="selected_group" value="{{ $groupData->id }}">{{ $groupData->name }}

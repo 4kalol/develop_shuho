@@ -120,7 +120,6 @@ class AdminShuhoController extends Controller
      */
     public function show($id)
     {
-        dd('show');
         $shuho = Shuho::find($id);
         return view('admin.shuhos.show', compact('shuho'));
     }
@@ -255,5 +254,39 @@ class AdminShuhoController extends Controller
         });
 
         return to_route('admin.shuhos.index')->with('success', 'グループが作成されました');
+    }
+    public function inviteRun(Request $request)
+    {
+        // リクエストのメールアドレスを取得
+        $email = $request->input('email');
+
+        // リクエストのメールアドレスが unit_users テーブルに存在するかチェック
+        $unitUser = UnitUser::where('users_id', function ($query) use ($email) {
+            $query->select('id')->from('users')->where('email', $email);
+        })
+        ->orWhere('admins_id', function ($query) use ($email) {
+            $query->select('id')->from('admins')->where('email', $email);
+        })
+        ->first();
+
+        if (!$unitUser) {
+            return back()->withInput()->with('error', '指定されたメールアドレスのユーザは存在しません');
+        }
+
+        // リクエストの selected_group を取得
+        $selectedGroupId = $request->input('selected_group');
+
+        // unit_users テーブルの id を使用して group_user レコードを取得
+        $groupUser = GroupUser::where('user_id', $unitUser->id)->first();
+
+        if (!$groupUser) {
+            return back()->withInput()->with('error', '指定されたユーザのグループ情報が存在しません');
+        }
+
+        // group_id を変更
+        $groupUser->group_id = $selectedGroupId;
+        $groupUser->save();
+
+        return redirect()->route('admin.shuhos.index')->with('success', 'グループが変更されました');
     }
 }

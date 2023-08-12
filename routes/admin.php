@@ -25,6 +25,10 @@ use App\Http\Controllers\AdminShuhoController;
 Route::get('admin/shuhos/invite', [AdminShuhoController::class, 'invite'])
     ->name('shuhos.invite');
 
+// グループ招待ボタン押下時
+Route::post('admin/shuhos/inviterun', [AdminShuhoController::class, 'inviteRun'])
+    ->name('shuhos.inviterun');
+
 // ナビゲーションよりgroup押下時
 Route::get('admin/shuhos/group', [AdminShuhoController::class, 'group'])
     ->name('shuhos.group');
