@@ -12,9 +12,28 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <!-- Styles -->
+
+        <style>
+            .logo-item {
+                font-size: 26px;
+            }
+
+            .report-list-area {
+                background: white;
+            }
+            .group-list-area {
+                background: #56A67F;
+                height: 885px;
+            }
+
+            .centered-content {
+                text-align: center;
+            }
+        </style>
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
+        <div class="min-h-screen bg-green-100">
             @if(auth('admins')->user())
                 @include('layouts.admin-navigation')
             @elseif(auth('users')->user())
@@ -22,19 +41,6 @@
             @endif
             <!-- Page Heading -->
             <header class="shadow">
-            @php
-            $barColor = '';
-            if (auth('admins')->check()) {
-                $barColor = 'bg-yellow-100';
-            } elseif (auth('users')->check()) {
-                $barColor = 'bg-green-100';
-            }
-            @endphp
-                <div class="{{ $barColor }} ">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    {{ $header }}
-                </div>
-                </div>
             </header>
 
             <!-- Page Content -->

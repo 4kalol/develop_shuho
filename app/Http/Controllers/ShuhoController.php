@@ -7,6 +7,9 @@ use App\Models\Shuho;
 use App\Http\Requests\StoreShuhoRequest;
 use Illuminate\Support\Facades\Auth; // Authクラスを使うために追加
 use App\Models\User;
+use App\Models\UnitUser;
+use App\Models\GroupUser;
+use App\Models\Group;
 
 class ShuhoController extends Controller
 {
@@ -23,15 +26,31 @@ class ShuhoController extends Controller
 
     public function index()
     {
+        $currentUser = Auth::guard('users')->user();
+        if ($currentUser) {
+                $currentUnitUser = UnitUser::Where('users_id', $currentUser->id)->first();
+
+            // 管理者ユーザーがunit_usersテーブルに紐づいている場合は、unit_usersテーブルのidを取得
+            if ($currentUnitUser) {
+                $unitUserId = $currentUnitUser->id;
+            }
+        }
+        // unit_usersテーブルのIDから現在所属しているグループのデータを取得
+        $currentUserGroupDatas = GroupUser::where('user_id', $unitUserId)->get();
+        $groupIds = $currentUserGroupDatas->pluck('group_id'); // group_idを配列として取得
+        $currentGroupDatas = Group::whereIn('id', $groupIds)->get();
+
+
+
         $user_id = Auth::id();
         $shuhos = Shuho::whereHas('user', function ($query) use ($user_id) {
             $query->where('id', $user_id);
         })
         ->orderBy('id', 'desc') // ここでidカラムを降順にソート
-        ->select('id', 'name', 'created_at', 'checked')
-            ->paginate(5);
+        ->select('id', 'name', 'created_at', 'checked', 'level')
+            ->paginate(9);
 
-        return view('user.shuhos.index', ['shuhos' => $shuhos]);
+        return view('user.shuhos.index', ['shuhos' => $shuhos, 'groups'=> $currentGroupDatas]);
     }
 
     /**
