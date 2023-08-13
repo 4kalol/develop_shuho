@@ -30,6 +30,18 @@
             .centered-content {
                 text-align: center;
             }
+
+            .color-level-good {
+                color: #229E97;
+            }
+
+            .color-level-normal {
+                color: #C57E2C;
+            }
+
+            .color-level-bad {
+                color: #C94F57;
+            }
         </style>
     </head>
     <body class="font-sans antialiased">

@@ -30,6 +30,11 @@ class AdminShuhoController extends Controller
     {
         // 現在のユーザのunit_usersテーブルのidを取得
         $currentUnitUserId = $this->getCurrentAdminUnitUserId();
+        // unit_usersテーブルのIDから現在所属しているグループのデータを取得
+        $currentUserGroupDatas = GroupUser::where('user_id', $currentUnitUserId)->get();
+        $groupIds = $currentUserGroupDatas->pluck('group_id'); // group_idを配列として取得
+        $currentGroupDatas = Group::whereIn('id', $groupIds)->get();
+
 
         // $currentUnitUserIdを使用してgroup_userテーブルより
         // ログインユーザのレコードを取得する
@@ -50,12 +55,12 @@ class AdminShuhoController extends Controller
             $shuhos = Shuho::whereIn('user_id', $users->pluck('id'))
                     ->select('id', 'name', 'created_at', 'level', 'checked')
                     ->orderBy('created_at', 'desc')
-                    ->paginate(5);
+                    ->paginate(9);
             
             // 暫定でViewファイルに渡す際の変数名を以前のものに治します
             $users = $shuhos;
 
-            return view('admin.shuhos.index', ['users' => $users]);
+            return view('admin.shuhos.index', ['users' => $users, 'groups' => $currentGroupDatas]);
         }
     }
 

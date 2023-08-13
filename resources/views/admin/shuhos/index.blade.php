@@ -1,58 +1,64 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Spinach') }}
-        </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    <div class="lg:w-2/3 w-full mx-auto overflow-auto">
-                    <table class="table-auto w-full text-left whitespace-no-wrap">
-                        <thead>
-                        <tr>
-                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">氏名</th>
-                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">作成日</th>
-                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">状況</th>
-                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">承認</th>
-                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">詳細</th>
-                        </tr>
-                        </thead>
+    <div class="flex max-w-7xl mx-auto">
+        <div class="w-1/4 mx-2">
+        <div class="ml-2 text-lg font-semibold mb-1 mt-8 text-gray-500">グループ</div>
+        <!-- グループ一覧をここに配置 -->
+        <!-- 例えば、以下のように -->
+        <div class="group-list-area">
+        <div class="p-4">
+            @foreach($groups as $group)
+            <li class="py-4 pl-2 mb-2 h-full border border-blue bg-white"><a href="#" class="font-bold text-gray-500">{{ $group->name }}</a></li>
+            @endforeach
+        </div>
+        </div>
+    </div>
+
+    <div class="w-3/4 mx-2">
+    <div class="ml-2 text-lg font-semibold mb-1 mt-8 text-gray-500">最近の更新</div>
+        <div class="report-list-area sm:px-0 lg:px-0">
+            <div class="overflow-hidden shadow-sm">
+                    <div class="w-full overflow-auto">
+                    <table class="table-auto w-full text-left">
                         <tbody>
                         @foreach($users as $user)
-                        <tr>
-                            <td class="px-4 py-3">{{ $user->name }}</td>
-                            <td class="px-4 py-3">{{ $user->created_at }}</td>
+                        <tr class="border border-blue border-2">
+                            <td class="w-1/5 mx-100 pl-3 pr-0 pb-12 text-sm font-bold text-gray-500">{{ $user->name }}</td>
                             @php
-                            $level = $user->level;
-                            $strLevel = ''; // 初期化
-                            if ($level == 'good'){
-                                $strLevel = '順調';
+                            if ($user->level == "good")
+                            {
+                                $strLevel = "順調";
+                                $colorLevel = "color-level-good";
                             }
-                            if ($level == 'normal'){
-                                $strLevel = 'やや問題';
+                            if ($user->level == "normal")
+                            {
+                                $strLevel = "やや問題";
+                                $colorLevel = "color-level-normal";
                             }
-                            if ($level == 'bad'){
-                              $strLevel = '問題あり';
+                            if ($user->level == "bad")
+                            {
+                                $strLevel = "問題あり";
+                                $colorLevel = "color-level-bad";
                             }
                             @endphp
-                            <td class="px-4 py-3">{{ $strLevel }}</td>
+                            <td class="w-1/5 px-4 py-8 {{ $colorLevel }} text-lg font-bold">{{ $strLevel }}</td>
                             @php
                             if ($user->checked == false)
                             {
-                                $strcheck = "未";
-                                $colorcheck = "text-red-400";
+                                $strcheck = "未承認";
+                                $colorcheck = "text-gray-500";
                             }
                             if ($user->checked == true)
                             {
-                                $strcheck = "済";
-                                $colorcheck = "text-green-400";
+                                $strcheck = "承認済";
+                                $colorcheck = "text-green-600";
                             }
                             @endphp
-                            <td class="px-4 py-3 {{ $colorcheck }} hover:text-blue-500"><a href="{{ route('admin.shuhos.checkSub',$user->id) }}">{{ $strcheck }}</a></td>
-                            <td class="px-4 py-3 hover:text-blue-500"><a href="{{ route('admin.shuhos.show',$user->id) }}">詳細を見る</a></td>
+                            <td class="w-1/5 px-4 py-8 {{ $colorcheck }} text-lg font-bold hover:text-blue-500"><a href="{{ route('admin.shuhos.checkSub',$user->id) }}">{{ $strcheck }}</a></td>
+                            <td class="w-2/5 mt-8 mb-5 hover:text-gray-500 flex mx-auto text-white bg-gray-500 border-0 focus:outline-none hover:bg-gray-600 rounded text-lg"><a href="{{ route('admin.shuhos.show',$user->id) }}" class="flex justify-center w-full h-full">詳細</a></td>
+                            <td class="w-1/5 pt-11 pr-4 text-xs text-right font-bold text-gray-500">{{ $user->created_at }}</td>   
                         </tr>
                         @endforeach
                         </tbody>
