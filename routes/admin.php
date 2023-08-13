@@ -21,6 +21,10 @@ use App\Http\Controllers\AdminShuhoController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// ナビゲーションよりmember押下時
+Route::get('admin/shuhos/memberList', [AdminShuhoController::class, 'memberList'])
+    ->name('shuhos.memberList');
+
 // ナビゲーションよりinvite押下時
 Route::get('admin/shuhos/invite', [AdminShuhoController::class, 'invite'])
     ->name('shuhos.invite');

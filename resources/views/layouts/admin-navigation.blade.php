@@ -21,6 +21,9 @@
                     <x-nav-link :href="route('admin.shuhos.invite')" :active="request()->routeIs('admin.shuhos.invite')">
                         招待
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.shuhos.memberList')" :active="request()->routeIs('admin.shuhos.memberList')">
+                        メンバー
+                    </x-nav-link>
                 </div>
             </div>
 

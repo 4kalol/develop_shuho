@@ -294,4 +294,36 @@ class AdminShuhoController extends Controller
 
         return redirect()->route('admin.shuhos.index')->with('success', 'グループが変更されました');
     }
+
+    public function memberList() {
+        // 現在のユーザのunit_usersテーブルのidを取得
+        $currentUnitUserId = $this->getCurrentAdminUnitUserId();
+        // unit_usersテーブルのidから紐づくgroup_userテーブルgroup_idを全て取得
+        $currentUserGroupDatas = GroupUser::where('user_id', $currentUnitUserId)->get();
+        // group_idを使用してunit_usersテーブルの同一グループのデータ取得
+        // 各グループごとに処理
+        $groupUsers = collect(); // 空のコレクションを初期化
+        foreach ($currentUserGroupDatas as $groupData) {
+            // 各グループごとに関連するユーザーデータを取得してコレクションに追加
+            $groupUsers = $groupUsers->merge(GroupUser::where('group_id', $groupData->group_id)->get());
+        }
+        // user_idよりunit_usersテーブルのIDが一致するユーザデータを取得
+        $groupUnitUsers = collect(); // 空のコレクションを初期化
+        foreach ($groupUsers as $groupUser) {
+            $groupUnitUsers = $groupUnitUsers->merge(UnitUser::where('id', $groupUser->user_id)->get());
+        }
+        // unit_usersテーブルのidに紐づく各メンバーユーザ、管理者ユーザの情報を取得
+        $groupAdminUsers = collect();   // 管理者
+        $groupMemberUsers = collect();   // メンバー
+        foreach ($groupUnitUsers as $groupUnitUser) {
+            if ($groupUnitUser->users_id == null) {
+                $groupAdminUsers = $groupAdminUsers->merge(Admin::where('id', $groupUnitUser->admins_id)->get());
+            }
+            if ($groupUnitUser->admins_id == null) {
+                $groupMemberUsers = $groupMemberUsers->merge(User::where('id', $groupUnitUser->users_id)->get());
+            }
+        }      
+
+        return view('admin.shuhos.memberList', ['admins' => $groupAdminUsers, 'users' => $groupMemberUsers]);
+    }
 }
