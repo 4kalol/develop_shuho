@@ -262,6 +262,12 @@ class AdminShuhoController extends Controller
     }
     public function inviteRun(Request $request)
     {
+        // 追加先のグループを選択していない場合には処理を実行せずにエラーを表示する
+        $selectGroup = $request->selected_group;
+        if ($selectGroup == null) {
+            return back()->with('error', '招待先グループが選択されていません');
+        }
+
         // リクエストのメールアドレスを取得
         $email = $request->input('email');
 
@@ -292,7 +298,7 @@ class AdminShuhoController extends Controller
         $groupUser->group_id = $selectedGroupId;
         $groupUser->save();
 
-        return redirect()->route('admin.shuhos.index')->with('success', 'グループが変更されました');
+        return redirect()->route('admin.shuhos.index')->with('success', 'グループメンバーを追加しました');
     }
 
     public function memberList() {
@@ -325,5 +331,44 @@ class AdminShuhoController extends Controller
         }      
 
         return view('admin.shuhos.memberList', ['admins' => $groupAdminUsers, 'users' => $groupMemberUsers]);
+    }
+
+    // グループ退出機能(管理者)
+    public function evictAdmin($id) {
+        // 渡されたadminsテーブルのidよりunit_usersテーブルのidを取得
+        $unitUserData = UnitUser::where('admins_id', $id)->first();
+        $unitUserId = $unitUserData->id;
+        // unit_usersテーブルのidよりgroup_userテーブルのgroup_idを取得
+        $groupUserData = GroupUser::where('user_id', $unitUserId)->first();
+        $groupUserGroupId = $groupUserData->group_id;
+        // 後々の判定のためにバックアップを取っておく
+        $backUpGroupId = $groupUserGroupId;
+        // グループ退出のためgroup_idをgroup_userテーブルのPKであるidの値に更新
+        $groupUserData->group_id = $groupUserData->id;
+
+        // バックアップと比較しホスト管理者ユーザ出ない場合には退会させる
+        if ($groupUserData->group_id != $backUpGroupId)
+        {
+            $groupUserData->save();
+            return redirect()->route('admin.shuhos.memberList')->with('success', 'グループメンバーを退出させました');
+        }
+        if ($groupUserData->group_id == $backUpGroupId)
+        {
+            return redirect()->route('admin.shuhos.memberList')->with('error', 'グループ作成者のため退出できません');
+        }
+    }
+
+    // グループ退出機能(メンバー)
+    public function evictMember($id) {
+        // 渡されたadminsテーブルのidよりunit_usersテーブルのidを取得
+        $unitUserData = UnitUser::where('users_id', $id)->first();
+        $unitUserId = $unitUserData->id;
+        // unit_usersテーブルのidよりgroup_userテーブルのgroup_idを取得
+        $groupUserData = GroupUser::where('user_id', $unitUserId)->first();
+        $groupUserGroupId = $groupUserData->group_id;
+        // グループ退出のためgroup_idをgroup_userテーブルのPKであるidの値に更新、保存
+        $groupUserData->group_id = $groupUserData->id;
+        $groupUserData->save();
+        return redirect()->route('admin.shuhos.memberList')->with('success', 'グループメンバーを退出させました');
     }
 }

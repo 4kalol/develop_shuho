@@ -21,6 +21,15 @@
                         <p class="lg:w-2/3 mx-auto leading-relaxed text-base">メンバー追加画面</p>
                         </div>
                         <div class="lg:w-1/2 md:w-2/3 mx-auto">
+                        @if(session('success'))
+                            <div class="alert alert-success text-green-400 mx-1 my-1">
+                                {{ session('success') }}
+                            </div>
+                        @elseif(session('error'))
+                            <div class="alert alert-error text-red-400 mx-1 my-1">
+                                {{ session('error') }}
+                            </div>
+                        @endif
                         <div class="flex flex-wrap -m-2">
 
                             <!-- email(メンバーアドレス) -->

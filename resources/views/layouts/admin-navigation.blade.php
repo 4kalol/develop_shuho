@@ -5,7 +5,7 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="logo-item font-bold font-custom text-gray-500 shrink-0 flex items-center">
-                    <a href="{{ route('user.shuhos.index') }}">
+                    <a href="{{ route('admin.shuhos.index') }}">
                         <span class="text-green-500">S</span>pinach.
                     </a>
                 </div>

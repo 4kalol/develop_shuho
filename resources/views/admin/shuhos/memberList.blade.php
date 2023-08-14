@@ -14,6 +14,15 @@
                         <div class="flex flex-col text-center w-full mb-12">
                         <p class="lg:w-2/3 mx-auto leading-relaxed text-base">メンバー管理画面</p>
                         </div>
+                        @if(session('success'))
+                            <div class="alert alert-success text-green-400 mx-4 my-1">
+                                {{ session('success') }}
+                            </div>
+                        @elseif(session('error'))
+                            <div class="alert alert-error text-red-400 mx-4 my-1">
+                                {{ session('error') }}
+                            </div>
+                        @endif
                         <div class="w-full mx-2">
                         <div class="report-list-area sm:px-0 lg:px-0">
                             <div class="overflow-hidden shadow-sm">
@@ -24,14 +33,14 @@
                                         <tr class="border border-blue border-2">
                                             <td class="w-1/3 px-8 py-8 text-lg font-bold text-gray-500">{{ $admin->name }}</td>
                                             <td class="w-1/3 px-4 py-8 text-lg font-bold">{{ $admin->email }}</td>
-                                            <td class="w-1/5 mt-8 mb-5 hover:text-gray-500 flex mx-auto text-white bg-gray-500 border-0 focus:outline-none hover:bg-gray-600 rounded text-lg"><a href="{{ route('admin.shuhos.show',$admin->id) }}" class="flex justify-center w-full h-full">削除</a></td>
+                                            <td class="w-1/5 mt-8 mb-5 hover:text-gray-500 flex mx-auto text-white bg-gray-500 border-0 focus:outline-none hover:bg-gray-600 rounded text-lg"><a href="{{ route('admin.shuhos.evictAdmin',$admin->id) }}" class="flex justify-center w-full h-full">削除</a></td>
                                         </tr>
                                         @endforeach
                                         @foreach($users as $user)
                                         <tr class="border border-blue border-2">
                                             <td class="w-1/3 px-8 py-8 text-lg font-bold text-gray-500">{{ $user->name }}</td>
                                             <td class="w-1/5 px-4 py-8 text-lg font-bold">{{ $user->email }}</td>
-                                            <td class="w-1/5 mt-8 mb-5 hover:text-gray-500 flex mx-auto text-white bg-gray-500 border-0 focus:outline-none hover:bg-gray-600 rounded text-lg"><a href="{{ route('admin.shuhos.show',$user->id) }}" class="flex justify-center w-full h-full">削除</a></td>
+                                            <td class="w-1/5 mt-8 mb-5 hover:text-gray-500 flex mx-auto text-white bg-gray-500 border-0 focus:outline-none hover:bg-gray-600 rounded text-lg"><a href="{{ route('admin.shuhos.evictMember',$user->id) }}" class="flex justify-center w-full h-full">削除</a></td>
                                         </tr>
                                         @endforeach
                                         </tbody>

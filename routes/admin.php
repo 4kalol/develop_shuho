@@ -21,6 +21,14 @@ use App\Http\Controllers\AdminShuhoController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// グループ退出機能(管理者)
+Route::get('admin/shuhos/evictAdmin/{id}', [AdminShuhoController::class, 'evictAdmin'])
+    ->name('shuhos.evictAdmin');
+
+// グループ退出機能(メンバー)
+Route::get('admin/shuhos/evictMember/{id}', [AdminShuhoController::class, 'evictMember'])
+    ->name('shuhos.evictMember');
+
 // ナビゲーションよりmember押下時
 Route::get('admin/shuhos/memberList', [AdminShuhoController::class, 'memberList'])
     ->name('shuhos.memberList');
