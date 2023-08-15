@@ -3,7 +3,7 @@
     </x-slot>
 
     <div class="flex max-w-7xl mx-auto">
-        <div class="w-1/4 mx-2">
+        <div class="w-1/4 mx-2 hidden sm:block">
         <div class="ml-2 text-lg font-semibold mb-1 mt-8 text-gray-500">グループ</div>
         <!-- グループ一覧をここに配置 -->
         <!-- 例えば、以下のように -->
@@ -16,7 +16,7 @@
         </div>
     </div>
 
-    <div class="w-3/4 mx-2">
+    <div class="mx-2 w-full sm:w-3/4 mb-20 sm:mb-0">
     <div class="ml-2 text-lg font-semibold mb-1 mt-8 text-gray-500">最近の更新</div>
         <div class="report-list-area sm:px-0 lg:px-0">
             <div class="overflow-hidden shadow-sm">
@@ -70,5 +70,8 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="index_footer sm:hidden bg-green-300 w-full py-5">
+        タブ
     </div>
 </x-app-layout>

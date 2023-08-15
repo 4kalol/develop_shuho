@@ -42,6 +42,12 @@
             .color-level-bad {
                 color: #C94F57;
             }
+
+            .index_footer {
+                position: fixed;
+                bottom: 0;
+            }
+
         </style>
     </head>
     <body class="font-sans antialiased">
