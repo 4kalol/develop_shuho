@@ -109,7 +109,7 @@
                             <a href="{{ route('admin.shuhos.comment', $shuho->id) }}" class="w-1/4 flex mx-auto my-1 text-white bg-indigo-500 border-0 flex justify-center ... focus:outline-none hover:bg-indigo-600 rounded text-lg">コメント</a>
                             </div>
                         </div>
-                        <a href="{{ route('admin.shuhos.index') }}" class="text-blue-500">キャンセル</a>
+                        <a href="{{ route('admin.shuhos.index') }}" class="hidden sm:block text-blue-500">キャンセル</a>
                         </div>
                     </div>
                     </section>
@@ -117,5 +117,11 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="index_footer sm:hidden flex bg-green-200 w-full my-auto">
+        <div class="w-1/6 mx-auto my-2"><a href="{{ route('admin.shuhos.index') }}"><img src="{{ asset('storage/images/house-button.svg') }}" class="flex justify-center"></a></div>
+        <div class="w-1/6 mx-auto my-2"><a href="{{ route('admin.shuhos.group') }}"><img src="{{ asset('storage/images/people-roof-solid.svg') }}" class="flex justify-center"></a></div>
+        <div class="w-1/6 mx-auto my-2"><a href="{{ route('admin.shuhos.invite') }}"><img src="{{ asset('storage/images/user-plus-solid.svg') }}" class="flex justify-center"></a></div>
+        <div class="w-1/6 mx-auto my-2"><a href="{{ route('admin.shuhos.memberList') }}"><img src="{{ asset('storage/images/users-solid.svg') }}" class="flex justify-center"></a></div>
     </div>
 </x-app-layout>
