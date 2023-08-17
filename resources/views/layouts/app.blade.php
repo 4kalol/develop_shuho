@@ -51,7 +51,7 @@
         </style>
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-green-100">
+        <div class="navi-area min-h-screen bg-white-100">
             @if(auth('admins')->user())
                 @include('layouts.admin-navigation')
             @elseif(auth('users')->user())
