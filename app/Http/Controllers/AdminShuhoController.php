@@ -260,6 +260,8 @@ class AdminShuhoController extends Controller
 
         return to_route('admin.shuhos.index')->with('success', 'グループが作成されました');
     }
+
+    // 招待ボタン押下時
     public function inviteRun(Request $request)
     {
         // 追加先のグループを選択していない場合には処理を実行せずにエラーを表示する
