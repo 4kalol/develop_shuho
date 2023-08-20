@@ -65,4 +65,8 @@
             </div>
         </div>
     </div>
+    <div class="index_footer sm:hidden flex bg-gray-100 w-full my-auto border border-gray-300">
+        <div class="w-1/6 mx-auto my-0 border border-gray-100 p-4"><a href="{{ route('user.shuhos.index') }}"><img src="{{ asset('storage/images/普通の家のアイコン.png') }}" class="flex justify-center"></a></div>
+        <div class="w-1/6 mx-auto my-0 border border-gray-100 p-4"><a href="{{ route('user.shuhos.create') }}"><img src="{{ asset('storage/images/紙とペンのアイコン素材.png') }}" class="flex justify-center"></a></div>
+    </div>
 </x-app-layout>

@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="shadow border-b-4 border-black-500 bg-green-100">
+<nav x-data="{ open: false }" class="shadow border-b-4 border-black-500">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-3 sm:px-3 lg:px-3">
         <div class="flex justify-between h-16">
@@ -11,10 +11,7 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class=" font-bold font-custom hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <!-- <x-nav-link :href="route('user.dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link> -->
+                <div class="font-bold hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('user.shuhos.index')" :active="request()->routeIs('user.shuhos.index')">
                         ホーム
                     </x-nav-link>
@@ -68,11 +65,11 @@
 
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
+        <!-- <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('user.dashboard')" :active="request()->routeIs('user.dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-        </div>
+        </div> -->
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
@@ -89,7 +86,7 @@
                     <x-responsive-nav-link :href="route('user.logout')"
                             onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                        {{ __('Log Out') }}
+                        {{ __('ログアウト') }}
                     </x-responsive-nav-link>
                 </form>
             </div>
