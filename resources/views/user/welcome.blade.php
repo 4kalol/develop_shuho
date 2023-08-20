@@ -86,7 +86,7 @@
                 <div class="centered-image">
                 <img src="{{ asset('storage/images/ほうれん草アイコン.svg') }}" alt="ほうれん草アイコン" class="w-16 h-16">
                 </div>
-                <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900"><span class="title-comment">Spinach</span> へ ようこそ！
+                <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900"><span class="title-comment">S</span>pinach へ ようこそ！
                 </h1>
                 
                 <p class="welcome-comment mb-8 leading-relaxed">こちらからは報告の登録を行うことができます</p>
@@ -94,9 +94,9 @@
                 @if (Route::has('user.login'))
                     @auth('users')  
                     @else
-                    <a href="{{ route('user.login') }}" class="select-button inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">ログイン</a>
+                    <a href="{{ route('user.login') }}" class="select-button inline-flex border-0 py-2 px-6 focus:outline-none rounded text-lg">ログイン</a>
                     @if (Route::has('user.register'))
-                    <a href="{{ route('user.register') }}" class="select-button ml-4 inline-flex text-blue-700 bg-blue-100 border-0 py-2 px-6 focus:outline-none hover:bg-blue-200 rounded text-lg">新規ユーザ作成</a>
+                    <a href="{{ route('user.register') }}" class="select-button ml-4 inline-flex border-0 py-2 px-6 focus:outline-none rounded text-lg">新規登録</a>
                     @endif
                     @endauth
                 @endif

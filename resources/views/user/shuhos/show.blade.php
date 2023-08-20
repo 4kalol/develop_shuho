@@ -12,7 +12,7 @@
                     <section class="text-gray-600 body-font relative">
                     <div class="container px-5 mx-auto">
                         <div class="flex flex-col text-center w-full mb-12">
-                        <p class="lg:w-2/3 mx-auto leading-relaxed text-base">詳細画面</p>
+                        <p class="lg:w-2/3 mx-auto leading-relaxed text-base">報告詳細</p>
                         </div>
                         <div class="lg:w-1/2 md:w-2/3 mx-auto">
                         <div class="flex flex-wrap -m-2">
@@ -95,7 +95,7 @@
                             <!-- button(削除ボタン) -->
                             </div>
                             <div class="p-2">
-                            <a href="{{ route('user.shuhos.edit',$shuho->id) }}" class="w-1/4 flex mx-auto my-1 text-white bg-indigo-500 border-0 flex justify-center ... focus:outline-none hover:bg-indigo-600 rounded text-lg">編集</a>
+                            <a href="{{ route('user.shuhos.edit',$shuho->id) }}" class="w-1/4 flex mx-auto my-1 text-white bg-gray-500 border-0 flex justify-center ... focus:outline-none hover:bg-gray-600 rounded text-lg">編集</a>
                             <!-- 削除ボタン用にDELETEメソッドを持つフォームを使用 -->
                             <form action="{{ route('user.shuhos.destroy', $shuho->id) }}" method="POST" onsubmit="return confirm('本当に削除してもよろしいですか？');">
                                 @csrf
@@ -105,7 +105,7 @@
                             </div>
 
                         </div>
-                        <a href="{{ route('user.shuhos.index') }}" class="text-blue-500">キャンセル</a>
+                        <a href="{{ route('user.shuhos.index') }}" class="hidden sm:block text-blue-500">キャンセル</a>
                         </div>
                     </div>
                     </section>

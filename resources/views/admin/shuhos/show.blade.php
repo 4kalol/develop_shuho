@@ -12,7 +12,7 @@
                     <section class="text-gray-600 body-font relative">
                     <div class="container px-5 mx-auto">
                         <div class="flex flex-col text-center w-full mb-12">
-                        <p class="lg:w-2/3 mx-auto leading-relaxed text-base">詳細画面</p>
+                        <p class="lg:w-2/3 mx-auto leading-relaxed text-base">報告詳細</p>
                         </div>
                         <div class="lg:w-1/2 md:w-2/3 mx-auto">
                         <div class="flex flex-wrap -m-2">
@@ -104,9 +104,10 @@
                                 $buttonCheck = '承認取り消し';
                               }
                               @endphp
-                            <a href="{{ route('admin.shuhos.check',$shuho->id) }}" class="w-1/4 flex mx-auto my-1 text-white bg-indigo-500 border-0 flex justify-center ... focus:outline-none hover:bg-indigo-600 rounded text-lg">{{ $buttonCheck }}</a>
-
-                            <a href="{{ route('admin.shuhos.comment', $shuho->id) }}" class="w-1/4 flex mx-auto my-1 text-white bg-indigo-500 border-0 flex justify-center ... focus:outline-none hover:bg-indigo-600 rounded text-lg">コメント</a>
+                            <a href="{{ route('admin.shuhos.check',$shuho->id) }}" class="hidden w-1/4 sm:flex mx-auto my-1 text-white bg-gray-500 border-0 flex justify-center ... focus:outline-none hover:bg-gray-600 rounded text-lg">{{ $buttonCheck }}</a>
+                            <a href="{{ route('admin.shuhos.check',$shuho->id) }}" class="sm:hidden w-1/2 flex mx-auto my-1 text-white bg-gray-500 border-0 flex justify-center ... focus:outline-none hover:bg-gray-600 rounded text-lg">{{ $buttonCheck }}</a>
+                            <a href="{{ route('admin.shuhos.comment', $shuho->id) }}" class="hidden w-1/4 sm:flex mx-auto my-1 text-white bg-gray-500 border-0 flex justify-center ... focus:outline-none hover:bg-gray-600 rounded text-lg">コメント</a>
+                            <a href="{{ route('admin.shuhos.comment', $shuho->id) }}" class="sm:hidden w-1/2 flex mx-auto my-1 text-white bg-gray-500 border-0 flex justify-center ... focus:outline-none hover:bg-gray-600 rounded text-lg">コメント</a>
                             </div>
                         </div>
                         <a href="{{ route('admin.shuhos.index') }}" class="hidden sm:block text-blue-500">キャンセル</a>

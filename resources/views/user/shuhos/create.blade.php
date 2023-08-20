@@ -18,7 +18,7 @@
                         @csrf
                     <div class="container px-5 mx-auto">
                         <div class="flex flex-col text-center w-full mb-12">
-                        <p class="lg:w-2/3 mx-auto leading-relaxed text-base">新規登録</p>
+                        <p class="lg:w-2/3 mx-auto leading-relaxed text-base">報告作成</p>
                         </div>
                         <div class="lg:w-1/2 md:w-2/3 mx-auto">
                         <div class="flex flex-wrap -m-2">
@@ -65,7 +65,7 @@
                             <!-- button(登録ボタン) -->
                             </div>
                             <div class="p-2 w-full">
-                            <button class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">登録</button>
+                            <button class="flex mx-auto text-white bg-gray-500 border-0 py-2 px-8 focus:outline-none hover:bg-gray-600 rounded text-lg">報告</button>
                             </div>
 
                         </div>
@@ -73,7 +73,7 @@
                     </div>
                     </form>
                     </section>
-                    <a href="{{ route('user.shuhos.index') }}" class="text-blue-500">キャンセル</a>
+                    <a href="{{ route('user.shuhos.index') }}" class="hidden sm:block text-blue-500">キャンセル</a>
                 </div>
             </div>
         </div>

@@ -62,7 +62,7 @@
                             }
                             @endphp
                             <td class="hidden sm:inline-block w-1/5 px-4 py-8 {{ $colorcheck }} text-lg font-bold hover:text-blue-500">{{ $strcheck }}</td>
-                            <td class="sm:hidden inline-block w-1/5 pl-0 pr-5 my-2 mb-0 mx-0"><div class="border border-gray-300 p-2 flex justify-center w-8"><img src="{{ asset($imagecheck) }}"></div></td>
+                            <td class="sm:hidden inline-block w-1/5 pl-0 pr-5 my-2 mb-0 mx-0"><div class="border border-gray-300 p-2 flex justify-center w-11"><img src="{{ asset($imagecheck) }}"></div></td>
 
                             <td class="hidden sm:inline-block w-1/5 my-8 hover:text-gray-500 mx-auto text-white bg-gray-500 border-0 focus:outline-none hover:bg-gray-600 rounded text-lg"><a href="{{ route('user.shuhos.show',$shuho->id) }}" class="flex justify-center w-full h-full">詳細</a></td>
                             <td class="sm:hidden inline-block w-1/6 my-0 hover:text-gray-500 mx-auto text-white bg-gray-500 border-0 focus:outline-none hover:bg-gray-600 rounded text-base"><a href="{{ route('user.shuhos.show',$shuho->id) }}" class="flex justify-center w-full h-full">詳細</a></td>

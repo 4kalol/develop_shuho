@@ -18,7 +18,7 @@
                         @csrf
                     <div class="container px-5 mx-auto">
                         <div class="flex flex-col text-center w-full mb-12">
-                        <p class="lg:w-2/3 mx-auto leading-relaxed text-base">グループ作成画面</p>
+                        <p class="lg:w-2/3 mx-auto leading-relaxed text-base">グループ作成</p>
                         </div>
                         <div class="lg:w-1/2 md:w-2/3 mx-auto">
                         <div class="flex flex-wrap -m-2">
@@ -34,7 +34,7 @@
                             <!-- button(登録ボタン) -->
                             </div>
                             <div class="p-2 w-full">
-                            <button class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">作成</button>
+                            <button class="flex mx-auto text-white bg-gray-500 border-0 py-2 px-8 focus:outline-none hover:bg-gray-600 rounded text-lg">作成</button>
                             </div>
                         </div>
                         </div>
