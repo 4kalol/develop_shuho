@@ -22,34 +22,34 @@ use App\Http\Controllers\AdminShuhoController;
 |
 */
 // グループ退出機能(管理者)
-Route::get('admin/shuhos/evictAdmin/{id}', [AdminShuhoController::class, 'evictAdmin'])
+Route::get('shuhos/evictAdmin/{id}', [AdminShuhoController::class, 'evictAdmin'])
     ->name('shuhos.evictAdmin');
 
 // グループ退出機能(メンバー)
-Route::get('admin/shuhos/evictMember/{id}', [AdminShuhoController::class, 'evictMember'])
+Route::get('shuhos/evictMember/{id}', [AdminShuhoController::class, 'evictMember'])
     ->name('shuhos.evictMember');
 
 // ナビゲーションよりmember押下時
-Route::get('admin/shuhos/memberList', [AdminShuhoController::class, 'memberList'])
+Route::get('shuhos/memberList', [AdminShuhoController::class, 'memberList'])
     ->name('shuhos.memberList');
 
 // ナビゲーションよりinvite押下時
-Route::get('admin/shuhos/invite', [AdminShuhoController::class, 'invite'])
+Route::get('shuhos/invite', [AdminShuhoController::class, 'invite'])
     ->name('shuhos.invite');
 
 // グループ招待ボタン押下時
-Route::post('admin/shuhos/inviterun', [AdminShuhoController::class, 'inviteRun'])
+Route::post('shuhos/inviterun', [AdminShuhoController::class, 'inviteRun'])
     ->name('shuhos.inviterun');
 
 // ナビゲーションよりgroup押下時
-Route::get('admin/shuhos/group', [AdminShuhoController::class, 'group'])
+Route::get('shuhos/group', [AdminShuhoController::class, 'group'])
     ->name('shuhos.group');
 
 // グループ作成ボタン押下時
-Route::post('admin/shuhos/groupcreation', [AdminShuhoController::class, 'groupcreation'])
+Route::post('shuhos/groupcreation', [AdminShuhoController::class, 'groupcreation'])
     ->name('shuhos.groupcreation');
 
-Route::resource('admin/shuhos', AdminShuhoController::class);
+Route::resource('shuhos', AdminShuhoController::class);
 
 Route::get('/', function () {
     return view('admin.welcome');
@@ -57,17 +57,17 @@ Route::get('/', function () {
 
 // 管理者用 承認機能ルート
 // 詳細画面からのアクション
-Route::get('/admin/shuhos/check/{id}', [AdminShuhoController::class, 'checkShuho'])
+Route::get('shuhos/check/{id}', [AdminShuhoController::class, 'checkShuho'])
     ->name('shuhos.check');
 // メイン画面からの簡易アクション
-Route::get('/admin/shuhos/checkSub/{id}', [AdminShuhoController::class, 'checkShuhoSub'])
+Route::get('shuhos/checkSub/{id}', [AdminShuhoController::class, 'checkShuhoSub'])
     ->name('shuhos.checkSub');
 
 // 管理者用 コメント機能ON
-Route::get('/admin/shuhos/comment/{id}', [AdminShuhoController::class, 'comment'])
+Route::get('shuhos/comment/{id}', [AdminShuhoController::class, 'comment'])
     ->name('shuhos.comment');
 // 管理者用 コメント入力更新
-Route::put('/admin/shuhos/commentUpdate/{id}', [AdminShuhoController::class, 'commentUpdate'])
+Route::put('shuhos/commentUpdate/{id}', [AdminShuhoController::class, 'commentUpdate'])
     ->name('shuhos.commentUpdate');
 
 Route::get('/dashboard', function () {

@@ -103,7 +103,7 @@
                 <br>
                 <br>
                 <div class="select-button-admin">
-                <a href="http://127.0.0.1:8000" class="user-select">『報告者』の方はこちら</a>
+                <a href="https://nippo-tool-spinach.com/public" class="user-select">『報告者』の方はこちら</a>
                 </div>
                 </div>
             </div>

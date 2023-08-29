@@ -29,6 +29,50 @@
             .centered-content {
                 text-align: center;
             }
+
+            .user-select {
+                font-size: 14px;
+                margin-top: 10px;
+                padding-top: 10px;
+            }
+
+            .user-select:hover {
+                color: #2e8b57;
+            }
+
+            .welcome-comment {
+                font-size: 14px;
+            }
+
+            .select-buttons {
+                margin-top: 40px;
+            }
+
+            .select-button {
+                font-size: 20px;
+                margin-right: 15px;
+                margin-left: 15px;
+                padding-top: 5px;
+                padding-bottom: 5px;
+                border: 1px solid transparent;
+            }
+
+            .select-button:hover {
+                color: #2e8b57;
+                font-weight: 800;
+                border: 1px solid #2e8b57; /* ホバー時に境界線を表示 */
+            }
+
+            .title-comment {
+                color: #2e8b57;
+            }
+
+            .select-button-admin {
+                text-align: right;
+                margin-top: 120px;
+                margin-right: 35px;
+            }
+
         </style>
     </head>
     <body class="antialiased">
@@ -42,20 +86,25 @@
                 <div class="centered-image">
                 <img src="{{ asset('storage/images/ほうれん草アイコン.svg') }}" alt="ほうれん草アイコン" class="w-16 h-16">
                 </div>
-                <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">Spinach へ、ようこそ！
+                <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900"><span class="title-comment">S</span>pinach へ ようこそ！
                 </h1>
                 
-                <p class="mb-8 leading-relaxed">報告の登録,管理を行うことができるアプリです.</p>
-                <div class="flex justify-center">
-                @if (Route::has('login'))
-                    @auth  
+                <p class="welcome-comment mb-8 leading-relaxed">こちらからは報告の登録を行うことができます</p>
+                <div class="select-buttons flex justify-center">
+                @if (Route::has('user.login'))
+                    @auth('users')  
                     @else
-                    <a href="{{ route('login') }}" class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">ログイン</a>
-                    @if (Route::has('register'))
-                    <a href="{{ route('register') }}" class="ml-4 inline-flex text-blue-700 bg-blue-100 border-0 py-2 px-6 focus:outline-none hover:bg-blue-200 rounded text-lg">新規ユーザ作成</a>
+                    <a href="{{ route('user.login') }}" class="select-button inline-flex border-0 py-2 px-6 focus:outline-none rounded text-lg">ログイン</a>
+                    @if (Route::has('user.register'))
+                    <a href="{{ route('user.register') }}" class="select-button ml-4 inline-flex border-0 py-2 px-6 focus:outline-none rounded text-lg">新規登録</a>
                     @endif
                     @endauth
                 @endif
+                </div>
+                <br>
+                <br>
+                <div class="select-button-admin">
+                <a href="https://nippo-tool-spinach.com/public/admin" class="user-select">『管理者』の方はこちら</a>
                 </div>
                 </div>
             </div>
