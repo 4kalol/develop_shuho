@@ -19,6 +19,7 @@ use App\Http\Controllers\ShuhoController;
 Route::resource('shuhos', ShuhoController::class);
 
 Route::get('/', function () {
+    dd('test');
     return view('user.welcome');
 });
 
