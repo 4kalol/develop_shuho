@@ -52,13 +52,23 @@
                             {
                                 $strcheck = "未承認";
                                 $colorcheck = "text-gray-500";
-                                $imagecheck = "storage/images/空欄.png";
+                                if (config('app.env') === 'local'){
+                                    $imagecheck = "storage/images/空欄.png";
+                                }
+                                else {
+                                    $imagecheck = "develop_shuho/storage/images/空欄.png";
+                                }
                             }
                             if ($user->checked == true)
                             {
                                 $strcheck = "承認済";
                                 $colorcheck = "text-green-600";
-                                $imagecheck = "storage/images/approved3.png";
+                                if (config('app.env') === 'local'){
+                                    $imagecheck = "storage/images/approved3.png";
+                                }
+                                else {
+                                    $imagecheck = "develop_shuho/storage/images/approved3.png";
+                                }
                             }
                             @endphp
                             <td class="hidden sm:inline-block w-1/5 px-4 py-8 {{ $colorcheck }} text-lg font-bold hover:text-blue-500"><a href="{{ route('admin.shuhos.checkSub',$user->id) }}">{{ $strcheck }}</a></td>

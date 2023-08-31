@@ -83,7 +83,11 @@
             
                 <div class="text-center lg:w-2/3 w-full">
                 <div class="centered-image">
+                @if(config('app.env') === 'local')
                 <img src="{{ asset('storage/images/ほうれん草アイコン.svg') }}" alt="ほうれん草アイコン" class="w-16 h-16">
+                @else
+                <img src="{{ asset('develop_shuho/storage/images/ほうれん草アイコン.svg') }}" alt="ほうれん草アイコン" class="w-16 h-16">
+                @endif
                 </div>
                 <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900"><span class="title-comment">S</span>pinach へ ようこそ！
                 </h1>
@@ -103,7 +107,11 @@
                 <br>
                 <br>
                 <div class="select-button-admin">
+                @if(config('app.env') === 'local')
+                <a href="http://127.0.0.1:8000" class="user-select">『報告者』の方はこちら</a>
+                @else
                 <a href="https://nippo-tool-spinach.com/public" class="user-select">『報告者』の方はこちら</a>
+                @endif
                 </div>
                 </div>
             </div>
