@@ -53,10 +53,10 @@
                                 $strcheck = "未承認";
                                 $colorcheck = "text-gray-500";
                                 if (config('app.env') === 'local'){
-                                    $imagecheck = "storage/images/空欄.png";
+                                    $imagecheck = "{{ asset('storage/images/空欄.png') }}";
                                 }
                                 else {
-                                    $imagecheck = "develop_shuho/storage/images/空欄.png";
+                                    $imagecheck = "https://nippo-tool-spinach.com/develop_shuho/storage/images/空欄.png";
                                 }
                             }
                             if ($user->checked == true)
@@ -64,15 +64,15 @@
                                 $strcheck = "承認済";
                                 $colorcheck = "text-green-600";
                                 if (config('app.env') === 'local'){
-                                    $imagecheck = "storage/images/approved3.png";
+                                    $imagecheck = "{{ asset('storage/images/approved3.png') }}";
                                 }
                                 else {
-                                    $imagecheck = "develop_shuho/storage/images/approved3.png";
+                                    $imagecheck = "https://nippo-tool-spinach.com/develop_shuho/storage/images/approved3.png";
                                 }
                             }
                             @endphp
                             <td class="hidden sm:inline-block w-1/5 px-4 py-8 {{ $colorcheck }} text-lg font-bold hover:text-blue-500"><a href="{{ route('admin.shuhos.checkSub',$user->id) }}">{{ $strcheck }}</a></td>
-                            <td class="sm:hidden inline-block w-1/5 pl-0 pr-5 my-2 mb-0 mx-0"><div class="border border-gray-300 p-2 "><a href="{{ route('admin.shuhos.checkSub',$user->id) }}" class="flex justify-center w-8"><img src="{{ asset($imagecheck) }}"></a></div></td>
+                            <td class="sm:hidden inline-block w-1/5 pl-0 pr-5 my-2 mb-0 mx-0"><div class="border border-gray-300 p-2 "><a href="{{ route('admin.shuhos.checkSub',$user->id) }}" class="flex justify-center w-8"><img src="{{ $imagecheck }}"></a></div></td>
 
                             <td class="hidden sm:inline-block w-1/5 my-8 hover:text-gray-500 mx-auto text-white bg-gray-500 border-0 focus:outline-none hover:bg-gray-600 rounded text-lg"><a href="{{ route('admin.shuhos.show',$user->id) }}" class="flex justify-center w-full h-full">詳細</a></td>
                             <td class="sm:hidden inline-block w-1/6 my-0 hover:text-gray-500 mx-auto text-white bg-gray-500 border-0 focus:outline-none hover:bg-gray-600 rounded text-base"><a href="{{ route('admin.shuhos.show',$user->id) }}" class="flex justify-center w-full h-full">詳細</a></td>
