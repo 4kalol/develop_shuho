@@ -56,7 +56,7 @@
                                     $imagecheck = "{{ asset('storage/images/空欄.png') }}";
                                 }
                                 else {
-                                    $imagecheck = "https://nippo-tool-spinach.com/develop_shuho/public/storage/images/空欄.png";
+                                    $imagecheck = "https://nippo-tool-spinach.com/develop_shuho/storage/images/空欄.png";
                                 }
                             }
                             if ($user->checked == true)
@@ -67,7 +67,7 @@
                                     $imagecheck = "{{ asset('storage/images/approved3.png') }}";
                                 }
                                 else {
-                                    $imagecheck = "https://nippo-tool-spinach.com/develop_shuho/public/storage/images/approved3.png";
+                                    $imagecheck = "https://nippo-tool-spinach.com/develop_shuho/storage/images/approved3.png";
                                 }
                             }
                             @endphp
