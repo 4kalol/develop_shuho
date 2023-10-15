@@ -47,22 +47,36 @@
                             @endphp
                             <td class="hidden sm:inline-block w-1/5 px-4 py-8 {{ $colorLevel }} text-lg font-bold">{{ $strLevel }}</td>
                             <td class="sm:hidden inline-block w-1/3 my-2 px-0 pl-4 {{ $colorLevel }} text-base font-bold">{{ $strLevel }}</td>
-                            @php
-                            if ($user->checked == false)
-                            {
-                                $strcheck = "未承認";
-                                $colorcheck = "text-gray-500";
-                                $imagecheck = "storage/images/空欄.png";
-                            }
-                            if ($user->checked == true)
-                            {
-                                $strcheck = "承認済";
-                                $colorcheck = "text-green-600";
-                                $imagecheck = "storage/images/approved3.png";
-                            }
-                            @endphp
-                            <td class="hidden sm:inline-block w-1/5 px-4 py-8 {{ $colorcheck }} text-lg font-bold hover:text-blue-500"><a href="{{ route('admin.shuhos.checkSub',$user->id) }}">{{ $strcheck }}</a></td>
-                            <td class="sm:hidden inline-block w-1/5 pl-0 pr-5 my-2 mb-0 mx-0"><div class="border border-gray-300 p-2 "><a href="{{ route('admin.shuhos.checkSub',$user->id) }}" class="flex justify-center w-8"><img src="{{ asset($imagecheck) }}"></a></div></td>
+                            <script>
+                                document.addEventListener('click', function (event) {
+                                    if (event.target.classList.contains('approval-button')) {
+                                        const userId = event.target.getAttribute('data-userid');
+
+                                        axios.post('/admin/shuhos/checkSub/' + event.target.getAttribute('data-userid'), {
+                                            userId: userId,
+                                        })
+                                        .then(function (response) {
+                                            const newStatus = response.data.status;
+                                            event.target.textContent = newStatus === '1' ? '承認済' : '未承認';
+                                            event.target.setAttribute('data-status', newStatus);
+                                            event.target.classList.toggle('text-green-600', newStatus === '1');
+                                            event.target.classList.toggle('text-gray-500', newStatus === '0');
+                                        })
+                                        .catch(function (error) {
+                                            console.log(error);
+                                        });
+                                    }
+                                });
+                            </script>
+                            <td class="hidden sm:inline-block w-1/5 px-4 py-8 text-lg font-bold hover:text-blue-500">
+                                <button class="approval-button" data-userid="{{ $user->id }}" data-status="{{ $user->checked }}">
+                                    @if ($user->checked == 0)
+                                        未承認
+                                    @else
+                                        承認済
+                                    @endif
+                                </button>
+                            </td>
 
                             <td class="hidden sm:inline-block w-1/5 my-8 hover:text-gray-500 mx-auto text-white bg-gray-500 border-0 focus:outline-none hover:bg-gray-600 rounded text-lg"><a href="{{ route('admin.shuhos.show',$user->id) }}" class="flex justify-center w-full h-full">詳細</a></td>
                             <td class="sm:hidden inline-block w-1/6 my-0 hover:text-gray-500 mx-auto text-white bg-gray-500 border-0 focus:outline-none hover:bg-gray-600 rounded text-base"><a href="{{ route('admin.shuhos.show',$user->id) }}" class="flex justify-center w-full h-full">詳細</a></td>

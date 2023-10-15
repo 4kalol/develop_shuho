@@ -204,7 +204,10 @@ class AdminShuhoController extends Controller
             $shuho->checked = 0;
         }
         $shuho->save();
-        return redirect()->route('admin.shuhos.index', compact('shuho'));
+
+        // HTMLを返すのではなく、JSON応答を返す
+        // return redirect()->route('admin.shuhos.index', compact('shuho'));
+        return response()->json(['status' => $shuho->checked]);
     }
 
     //コメントボタン押下時

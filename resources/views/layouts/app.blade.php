@@ -49,6 +49,8 @@
             }
 
         </style>
+
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     </head>
     <body class="font-sans antialiased">
         <div class="navi-area min-h-screen bg-white-100">

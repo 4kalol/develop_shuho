@@ -60,7 +60,7 @@ Route::get('/', function () {
 Route::get('shuhos/check/{id}', [AdminShuhoController::class, 'checkShuho'])
     ->name('shuhos.check');
 // メイン画面からの簡易アクション
-Route::get('shuhos/checkSub/{id}', [AdminShuhoController::class, 'checkShuhoSub'])
+Route::post('shuhos/checkSub/{id}', [AdminShuhoController::class, 'checkShuhoSub'])
     ->name('shuhos.checkSub');
 
 // 管理者用 コメント機能ON
